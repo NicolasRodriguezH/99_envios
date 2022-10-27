@@ -21,7 +21,5 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 // V1
-Route::apiResource('v1/bogota_bogota', OwnGuideController::class)
-    ->only('store');
-
-Route::apiResource('v1/envios', ShipmentController::class);
+Route::apiResource('v1/own_fleet', OwnGuideController::class)/* ->names('guides') */;
+Route::apiResource('v1/shipments', ShipmentController::class)/* ->names('shipments') */;

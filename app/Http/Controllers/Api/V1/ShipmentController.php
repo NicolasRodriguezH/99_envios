@@ -15,7 +15,9 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        return Guide::all();
+        $shipments = new Guide();
+
+        return $shipments->all();
     }
 
     /**

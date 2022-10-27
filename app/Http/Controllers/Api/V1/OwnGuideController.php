@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Guide;
 use App\Http\Controllers\Controller;
+use App\Models\RapiRadicado;
+use App\Models\Receiver;
 use Illuminate\Http\Request;
 
 class OwnGuideController extends Controller
@@ -15,7 +17,18 @@ class OwnGuideController extends Controller
      */
     public function index()
     {
-        //
+        try {
+
+            $guide = new Guide();
+            return response()->json([
+                'guia' => $guide->orderBy('id', 'desc')->first()
+            ]);
+            /* $guide->orderBy('id', 'desc')->first();
+            return view('guides.index', compact('guide')); */
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -25,7 +38,16 @@ class OwnGuideController extends Controller
      */
     public function create()
     {
-        //
+        /* Esto no deberia ser necesario ya que si entra a la ruta "own_fleet" lo primero que se le mostrara sera el index, con los campos y formulario para generar la guia, osea no deberia haber un boton de crear por que ahi se creá */
+        try {
+            $guide = Guide::all();
+            $receivers = Receiver::all();
+            $rapiradicados = RapiRadicado::all();
+    
+            return view('guides.create', compact('receivers', 'rapiradicados', 'guide'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -35,7 +57,7 @@ class OwnGuideController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         try {
                 $guide = new Guide();
                 $guide->id_cliente_credito = $request->IdClienteCredito;
@@ -61,9 +83,50 @@ class OwnGuideController extends Controller
                             
                 $guide->save();
 
-                if($guide) {
+                $receiver = new Receiver();
+                $receiver->tipo_documento = $request->Destinatario['tipoDocumento'];
+                $receiver->numero_documento = $request->Destinatario['numeroDocumento'];
+                $receiver->nombre = $request->Destinatario['nombre'];
+                $receiver->primer_apellido = $request->Destinatario['primerApellido'];
+                $receiver->segundo_apellido = $request->Destinatario['segundoApellido'];
+                $receiver->telefono = $request->Destinatario['telefono'];
+                $receiver->direccion = $request->Destinatario['direccion'];
+                $receiver->id_destinatario = $request->Destinatario['idDestinatario'];
+                $receiver->id_remitente = $request->Destinatario['idRemitente'];
+                $receiver->id_localidad = $request->Destinatario['idLocalidad'];
+                $receiver->codigo_convenio = $request->Destinatario['CodigoConvenio'];
+                $receiver->convenio_destinatario = $request->Destinatario['ConvenioDestinatario'];
+                $receiver->correo = $request->Destinatario['correo'];
+                $receiver->guide_id = $guide->id;
+                
+                $receiver->save();
+                
+                $rapiradicado = new RapiRadicado();
+                $rapiradicado->numero_de_folios = $request->RapiRadicado['numerodeFolios'];
+                $rapiradicado->codigo_rapi_radicado = $request->RapiRadicado['CodigoRapiRadicado'];
+                $rapiradicado->guide_id = $guide->id;
+        
+                $rapiradicado->save();
+
+                /* Crear GuideRequest para validacion */
+
+                if( $request ) {
                     return response()->json([
-                        'datos_res' => "envia_y_salva_data_respuesta?"
+                        'data' => [
+                            'res' => "guia generada satisfactoriamente",
+                            'guia' => $guide->id,
+                            'contrapago' => $guide->aplica_contrapago,
+                            'contenido' => $guide->dice_contener,
+                            'peso' => $guide->peso,
+                            'largo' => $guide->largo,
+                            'ancho' => $guide->ancho,
+                            'alto' => $guide->alto,
+                            'valor' => $guide->valor_declarado,
+                            'observaciones' => $guide->observaciones,
+                            'nombre' => $receiver->nombre,
+                            'telefono' => $receiver->telefono,                        
+                            'direccion' => $receiver->direccion,
+                        ]
                     ], 201);
                 }
 
@@ -71,37 +134,14 @@ class OwnGuideController extends Controller
             throw $th;
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function edit(Guide $guide)
     {
         //
     }
@@ -112,7 +152,7 @@ class OwnGuideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Guide $guide)
     {
         //
     }

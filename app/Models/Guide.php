@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guide extends Model
 {
+    protected $guarded = ['id', 'timestamps'];
+
+    public function receiver() {
+        return $this->hasOne(Receiver::class);
+    }
+
+    public function rapiRadicado() {
+        return $this->hasOne(RapiRadicado::class);
+    }
+
     use HasFactory;
 }
