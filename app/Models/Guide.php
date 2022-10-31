@@ -17,5 +17,10 @@ class Guide extends Model
         return $this->hasOne(RapiRadicado::class);
     }
 
+    /* Relacion muchos a muchos */
+    public function status() {
+        return $this->belongsToMany(Statu::class);
+    }
+
     use HasFactory;
 }
