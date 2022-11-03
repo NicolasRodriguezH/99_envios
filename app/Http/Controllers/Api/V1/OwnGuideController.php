@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Guide;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\OwnGuideRequest;
 use App\Models\RapiRadicado;
 use App\Models\Receiver;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class OwnGuideController extends Controller
@@ -43,6 +45,8 @@ class OwnGuideController extends Controller
             $guide = Guide::all();
             $receivers = Receiver::all();
             $rapiradicados = RapiRadicado::all();
+
+            /* PREGUNTAR A CRIS SI RETORNAR UNA VISTA ES NECESARIO EN MI CASO, LO CUAL NO CREO */
     
             return view('guides.create', compact('receivers', 'rapiradicados', 'guide'));
         } catch (\Throwable $th) {
@@ -56,7 +60,7 @@ class OwnGuideController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OwnGuideRequest $request)
     {   
         try {
                 $guide = new Guide();
@@ -80,7 +84,12 @@ class OwnGuideController extends Controller
                 $guide->id_sucursal = $request->IdSucursal;
                 $guide->id_cliente = $request->IdCliente;
                 $guide->observaciones = $request->Observaciones;
-                            
+
+                //$guide->status_id = 1;
+                //dd($guide->status_id = $guide->status());
+                //$guide->status_id = $request->status;
+                //$guide->status_id = $guide->status();
+                
                 $guide->save();
 
                 $receiver = new Receiver();
@@ -124,8 +133,10 @@ class OwnGuideController extends Controller
                             'valor' => $guide->valor_declarado,
                             'observaciones' => $guide->observaciones,
                             'nombre' => $receiver->nombre,
+                            'primerApellido' => $receiver->primer_apellido,
                             'telefono' => $receiver->telefono,                        
                             'direccion' => $receiver->direccion,
+                            'correo' => $receiver->correo
                         ]
                     ], 201);
                 }

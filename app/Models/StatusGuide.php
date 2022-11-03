@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Statu extends Model
+class StatusGuide extends Model
 {
+
     protected $fillable = ['name', 'color'];
 
-    /* relacion muchos a muchos */
+    /* relacion uno a muchos */
     public function guides() {
-        return $this->belongsToMany(Guide::class);
+        return $this->hasMany(Guide::class);
     }
 
     use HasFactory;

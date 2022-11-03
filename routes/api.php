@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\OwnGuideController;
 use App\Http\Controllers\Api\V1\ShipmentController;
+use App\Http\Controllers\Api\V1\StatusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,9 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 // V1
-Route::apiResource('v1/own_fleet', OwnGuideController::class)/* ->names('guides') */;
+Route::apiResource('v1/generate', OwnGuideController::class)/* ->names('generate') */;
 Route::apiResource('v1/shipments', ShipmentController::class)/* ->names('shipments') */;
+
+/* Posiblemente tendria que crear otros endpoints para (mis guia generadas, ) */
+
+Route::apiResource('v1/status', StatusController::class);

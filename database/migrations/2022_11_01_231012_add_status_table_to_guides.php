@@ -13,12 +13,14 @@ class AddStatusTableToGuides extends Migration
      */
     public function up()
     {
-        Schema::table('guides', function (Blueprint $table) {
+        Schema::table('guides', function (Blueprint $table) {            
             $table->unsignedBigInteger('status_id')
+            ->nullable()
             ->after('observaciones');
             $table->foreign('status_id')
             ->references('id')
-            ->on('status');
+            ->on('status_guides')
+            ->onDelete('cascade');
         });
     }
 
