@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Guide;
-use App\Models\OriginDestiny;
 use Illuminate\Http\Request;
 
-class ShipmentController extends Controller
+class DestinyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,18 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = new Guide();
+        //
+    }
 
-        return $shipments->all();
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
     /**
@@ -27,18 +34,19 @@ class ShipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Guide $envio)
+    public function show($id)
     {
-        return $envio;
+        //
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guide $guide)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -49,9 +57,8 @@ class ShipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guide $guide)
+    public function destroy($id)
     {
-        $guide->delete();
-        return "Element deleted";
+        //
     }
 }

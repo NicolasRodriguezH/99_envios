@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Guide;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\OwnGuideRequest;
+use App\Models\Origin;
+use App\Models\OriginDestiny;
 use App\Models\RapiRadicado;
 use App\Models\Receiver;
 use App\Models\Status;
@@ -22,11 +24,21 @@ class OwnGuideController extends Controller
         try {
 
             $guide = new Guide();
+            $receivers = Receiver::all();
+            $rapiradicados = RapiRadicado::all();
+            $origin = new Origin();
+
+            //$origin->all();
+            /* Como se le deberian mandar? retornando una view? o con json? PREGUNTAR A CHRIS */
+
             return response()->json([
-                'guia' => $guide->orderBy('id', 'desc')->first()
+                'guia' => $guide->orderBy('id', 'desc')->first(),
+                'receivers' => $receivers->all(),
+                'rapidadicados' => $rapiradicados->all(),
+                'origen' => $origin->all()
             ]);
-            /* $guide->orderBy('id', 'desc')->first();
-            return view('guides.index', compact('guide')); */
+            //$guide->orderBy('id', 'desc')->first();
+            //return view('guides.index', compact('guide', 'origin', 'receivers', 'rapiradicados'));
 
         } catch (\Throwable $th) {
             throw $th;
@@ -40,15 +52,17 @@ class OwnGuideController extends Controller
      */
     public function create()
     {
-        /* Esto no deberia ser necesario ya que si entra a la ruta "own_fleet" lo primero que se le mostrara sera el index, con los campos y formulario para generar la guia, osea no deberia haber un boton de crear por que ahi se creá */
+        /* Esto no deberia ser necesario ya que si entra a la ruta "generate" lo primero que se le mostrara sera el index, con los campos y formulario para generar la guia, osea no deberia haber un boton de crear por que ahi se creá */
         try {
             $guide = Guide::all();
-            $receivers = Receiver::all();
-            $rapiradicados = RapiRadicado::all();
+            $origin = new Origin();
 
-            /* PREGUNTAR A CRIS SI RETORNAR UNA VISTA ES NECESARIO EN MI CASO, LO CUAL NO CREO */
-    
-            return view('guides.create', compact('receivers', 'rapiradicados', 'guide'));
+            return response()->json([
+                'guia' => $guide->orderBy('id', 'desc')->first(), 
+                'origen' => $origin->all()
+            ]);
+
+            return view('guides.create', compact('guide', 'origin'));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -89,7 +103,7 @@ class OwnGuideController extends Controller
                 //dd($guide->status_id = $guide->status());
                 //$guide->status_id = $request->status;
                 //$guide->status_id = $guide->status();
-                
+
                 $guide->save();
 
                 $receiver = new Receiver();
@@ -118,7 +132,7 @@ class OwnGuideController extends Controller
                 $rapiradicado->save();
 
                 /* Crear GuideRequest para validacion */
-
+        
                 if( $request ) {
                     return response()->json([
                         'data' => [
@@ -144,17 +158,6 @@ class OwnGuideController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
-    }
-    
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Guide $guide)
-    {
-        //
     }
 
     /**

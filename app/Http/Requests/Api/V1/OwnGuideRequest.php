@@ -37,11 +37,11 @@ class OwnGuideRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    /* public function messages()
     {
         return [
             'Largo.required' => 'Se encesita un largo',
             'Ancho.required' => 'ES necesario un ancho'
         ];
-    }
+    } */
 }
