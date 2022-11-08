@@ -15,8 +15,9 @@ class CreateDestiniesTable extends Migration
     {
         Schema::create('destinies', function (Blueprint $table) {
             $table->id();
-            $table->string('destino');
-            $table->unsignedBigInteger('origin_id');
+            $table->string('destiny');
+            $table->unsignedBigInteger('origin_id')
+            ->nullable();
             $table->foreign('origin_id')
                 ->references('id')
                 ->on('origins');

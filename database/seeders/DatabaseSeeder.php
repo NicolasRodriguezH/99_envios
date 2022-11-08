@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         // StatusGuide::factory(24)->create();
 
         $this->call(StatusGuideSeeder::class);
-        $this->call(OriginDestinySeeder::class);
+        $this->call(OriginSeeder::class);
+        $this->call(DestinySeeder::class);
     }
 }

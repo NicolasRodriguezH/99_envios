@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOriginsTable extends Migration
+class AddShippingPickupTableToGuides extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateOriginsTable extends Migration
      */
     public function up()
     {
-        Schema::create('origins', function (Blueprint $table) {
-            $table->id();
-            $table->string('origin');
-            $table->timestamps();
+        Schema::table('guides', function (Blueprint $table) {
+            $table->boolean('shipping_pickup');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateOriginsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('origins');
+        Schema::table('guides', function (Blueprint $table) {
+            //
+        });
     }
 }

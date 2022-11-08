@@ -10,6 +10,7 @@ use App\Models\OriginDestiny;
 use App\Models\RapiRadicado;
 use App\Models\Receiver;
 use App\Models\Status;
+use App\Models\StatusGuide;
 use Illuminate\Http\Request;
 
 class OwnGuideController extends Controller
@@ -22,47 +23,13 @@ class OwnGuideController extends Controller
     public function index()
     {
         try {
-
-            $guide = new Guide();
-            $receivers = Receiver::all();
-            $rapiradicados = RapiRadicado::all();
             $origin = new Origin();
-
-            //$origin->all();
             /* Como se le deberian mandar? retornando una view? o con json? PREGUNTAR A CHRIS */
 
             return response()->json([
-                'guia' => $guide->orderBy('id', 'desc')->first(),
-                'receivers' => $receivers->all(),
-                'rapidadicados' => $rapiradicados->all(),
-                'origen' => $origin->all()
-            ]);
-            //$guide->orderBy('id', 'desc')->first();
-            //return view('guides.index', compact('guide', 'origin', 'receivers', 'rapiradicados'));
-
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        /* Esto no deberia ser necesario ya que si entra a la ruta "generate" lo primero que se le mostrara sera el index, con los campos y formulario para generar la guia, osea no deberia haber un boton de crear por que ahi se creá */
-        try {
-            $guide = Guide::all();
-            $origin = new Origin();
-
-            return response()->json([
-                'guia' => $guide->orderBy('id', 'desc')->first(), 
                 'origen' => $origin->all()
             ]);
 
-            return view('guides.create', compact('guide', 'origin'));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -98,11 +65,13 @@ class OwnGuideController extends Controller
                 $guide->id_sucursal = $request->IdSucursal;
                 $guide->id_cliente = $request->IdCliente;
                 $guide->observaciones = $request->Observaciones;
+                $guide->shipping_pickup = $request->shipping_pickup;
+                //$guide->status_id = $request->status_id;
 
-                //$guide->status_id = 1;
-                //dd($guide->status_id = $guide->status());
-                //$guide->status_id = $request->status;
-                //$guide->status_id = $guide->status();
+                $status = new StatusGuide();
+                $guide->status_id = $status->id = 1;
+
+                //$guide->status_id = $guide->first()->status->id = 1;
 
                 $guide->save();
 
@@ -150,7 +119,8 @@ class OwnGuideController extends Controller
                             'primerApellido' => $receiver->primer_apellido,
                             'telefono' => $receiver->telefono,                        
                             'direccion' => $receiver->direccion,
-                            'correo' => $receiver->correo
+                            'correo' => $receiver->correo,
+                            'status_id' => [$guide->status->name, $guide->status->color]
                         ]
                     ], 201);
                 }
