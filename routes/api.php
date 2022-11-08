@@ -21,7 +21,5 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('v1/generate', OwnGuideController::class)/* ->names('generate') */;
 Route::apiResource('v1/shipments', ShipmentController::class)/* ->names('shipments') */;
 
-/* Posiblemente tendria que crear otros endpoints para (mis guia generadas, ) */
-
 
 Route::apiResource('v1/status', StatusController::class);
