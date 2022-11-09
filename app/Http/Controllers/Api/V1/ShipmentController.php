@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,21 +19,14 @@ class ShipmentController extends Controller
         try {
             $shipments = new Guide();
 
-            return $shipments->all();
+            return response()->json([
+                'data' => [
+                    'mis_envios' => $shipments->all()
+                ]
+            ]);
         } catch (\Throwable $th) {
             throw $th;
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Guide $envio)
-    {
-        return $envio;
     }
 
     /**

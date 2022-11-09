@@ -7,12 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\OwnGuideRequest;
 use App\Models\Destiny;
 use App\Models\Origin;
-use App\Models\OriginDestiny;
 use App\Models\RapiRadicado;
 use App\Models\Receiver;
-use App\Models\Status;
 use App\Models\StatusGuide;
-use Illuminate\Http\Request;
 
 class OwnGuideController extends Controller
 {
@@ -24,11 +21,12 @@ class OwnGuideController extends Controller
     public function index()
     {
         try {
+            $destiny = new Destiny();
             $origin = new Origin();
-            /* Como se le deberian mandar? retornando una view? o con json? PREGUNTAR A CHRIS */
 
             return response()->json([
-                'origen' => $origin->all()
+                'origen' => $origin->all(),
+                'destinos' => $destiny->all()
             ]);
 
         } catch (\Throwable $th) {
@@ -67,18 +65,16 @@ class OwnGuideController extends Controller
                 $guide->id_cliente = $request->IdCliente;
                 $guide->observaciones = $request->Observaciones;
                 $guide->shipping_pickup = $request->shipping_pickup;
+                $guide->urlguide = $request->urlguide;
 
+                /* Primera opcion: Se asigna el request un campo status_id, se envia valor por el request, y el front podria poner un campo status_id en hidden si lo desea, de no ser asi elimine del request el campo "status_id" */
                 //$guide->status_id = $request->status_id;
+
+                /* Segunda opcion: seria solo llamando al modelo de status y asignando el valor id 1 que es igual a "creado", "REVISAR CUAL PODRIA USAR MEJOR", y eliminar los que no úse */
                 $status = new StatusGuide();
                 $guide->status_id = $status->id = 1;
-                //$guide->status_id = $guide->first()->status->id = 1;
 
-                /* $origin = new Origin();
-                $guide->origin_id = $origin->id = 1; */
                 $guide->origin_id = $request->origin_id;
-
-                /* $destiny = new Destiny();
-                $guide->destiny_id = $destiny->id = 5; */
                 $guide->destiny_id = $request->destiny_id;
 
                 $guide->save();
@@ -107,8 +103,6 @@ class OwnGuideController extends Controller
                 $rapiradicado->guide_id = $guide->id;
         
                 $rapiradicado->save();
-
-                /* TIENE QUE HABER UN CAMPO origin_id en guides e igual con destiny_id */
         
                 if( $request ) {
                     return response()->json([
@@ -128,6 +122,7 @@ class OwnGuideController extends Controller
                             'telefono' => $receiver->telefono,                        
                             'direccion' => $receiver->direccion,
                             'correo' => $receiver->correo,
+                            'urlguide' => $guide->urlguide,
                             'status_id' => [$guide->status->name, $guide->status->color],
                             'origen y destino' => [$guide->origin->origin, $guide->destiny->destiny]
                         ]

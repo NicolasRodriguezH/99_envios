@@ -10,7 +10,6 @@ class StatusGuide extends Model
 
     protected $fillable = ['name', 'color'];
 
-    /* relacion uno a muchos */
     public function guides() {
         return $this->hasMany(Guide::class);
     }

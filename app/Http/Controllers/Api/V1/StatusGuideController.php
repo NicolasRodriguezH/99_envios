@@ -34,10 +34,14 @@ class StatusGuideController extends Controller
     public function store(Request $request)
     {
         try {
-            $status = StatusGuide::create($request->all());
+            $status = new StatusGuide();
+            $status->name = $request->name;
+            $status->color = $request->color;
             $status->save();
     
-            return $status;
+            return response()->json([
+                'new_status' => $status
+            ]);
         } catch (\Throwable $th) {
             throw $th;
         }

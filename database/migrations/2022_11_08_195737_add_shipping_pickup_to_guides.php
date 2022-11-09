@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddShippingPickupTableToGuides extends Migration
+class AddShippingPickupToGuides extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddShippingPickupTableToGuides extends Migration
     public function up()
     {
         Schema::table('guides', function (Blueprint $table) {
-            $table->boolean('shipping_pickup');
+            $table->boolean('shipping_pickup')
+            ->after('id_cliente');
         });
     }
 
