@@ -87,7 +87,7 @@ class StatusGuideController extends Controller
     {
         try {
             $status->delete();
-            return "elemento eliminado correctamente";
+            return "Element deleted";
         } catch (\Throwable $th) {
             throw $th;
         }

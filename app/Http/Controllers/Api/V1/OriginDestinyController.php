@@ -92,6 +92,12 @@ class OriginDestinyController extends Controller
      */
     public function destroy(Origin $origin, Destiny $destiny)
     {
-        [$origin->delete(), $destiny->delete()];
+        try {
+            [$origin->delete(), $destiny->delete()];
+    
+            return "Element deleted";
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

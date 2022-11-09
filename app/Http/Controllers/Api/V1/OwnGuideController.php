@@ -67,10 +67,10 @@ class OwnGuideController extends Controller
                 $guide->shipping_pickup = $request->shipping_pickup;
                 $guide->urlguide = $request->urlguide;
 
-                /* Primera opcion: Se asigna el request un campo status_id, se envia valor por el request, y el front podria poner un campo status_id en hidden si lo desea, de no ser asi elimine del request el campo "status_id" */
+                /* Primera opcion: Se asigna el request un campo status_id, se envia valor por el request, y el front podria poner un campo status_id en hidden si lo desea */
                 //$guide->status_id = $request->status_id;
 
-                /* Segunda opcion: seria solo llamando al modelo de status y asignando el valor id 1 que es igual a "creado", "REVISAR CUAL PODRIA USAR MEJOR", y eliminar los que no úse */
+                /* Segunda opcion: seria solo llamando al modelo de status y asignando el valor id 1 que es igual a "creado", "REVISAR CUAL PODRIA USAR MEJOR"*/
                 $status = new StatusGuide();
                 $guide->status_id = $status->id = 1;
 
