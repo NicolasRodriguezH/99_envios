@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guide;
 use App\Models\Origin;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Guid\Guid;
 
 class OriginController extends Controller
 {
@@ -15,10 +17,14 @@ class OriginController extends Controller
      */
     public function index()
     {
-        $origin = new Origin();
-        return response()->json([
-            $origin->all()
-        ]);
+        try {
+            $origin = new Origin();
+            return response()->json([
+                $origin->all()
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -29,7 +35,16 @@ class OriginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $origin = new Origin();
+            $origin->origin = $request->origin;
+            $origin->save();
+
+            return $origin;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        
     }
 
     /**
@@ -38,9 +53,9 @@ class OriginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Origin $origin)
     {
-        //
+        return $origin;
     }
 
     /**
@@ -50,9 +65,16 @@ class OriginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Origin $origin)
     {
-        //
+        try {
+            $origin->update($request->all());
+            $origin->save();
+    
+            return $origin;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -61,8 +83,8 @@ class OriginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Origin $origin)
     {
-        //
+        $origin->delete();
     }
 }

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\StatusGuide;
+use App\Models\Destiny;
+use App\Models\Origin;
 use Illuminate\Http\Request;
 
-class StatusGuideController extends Controller
+class OriginDestinyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,11 @@ class StatusGuideController extends Controller
     public function index()
     {
         try {
-            $status = new StatusGuide();
+            $origin = new Origin();
+            $destiny = new Destiny();
             return response()->json([
-                $status->all()
+                $origin->all(),
+                $destiny->all()
             ]);
         } catch (\Throwable $th) {
             throw $th;
@@ -34,10 +37,15 @@ class StatusGuideController extends Controller
     public function store(Request $request)
     {
         try {
-            $status = StatusGuide::create($request->all());
-            $status->save();
+            $origin = new Origin();
+                $origin->origin = $request->origin;
+                $origin->save();
     
-            return $status;
+            $destiny = new Destiny();
+                $destiny->destiny = $request->destiny;
+                $destiny->save();
+    
+                return [$origin, $destiny];
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -49,9 +57,9 @@ class StatusGuideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(StatusGuide $status)
+    public function show(Origin $origin, Destiny $destiny)
     {
-        return $status;
+        return [$origin, $destiny];
     }
 
     /**
@@ -61,13 +69,16 @@ class StatusGuideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StatusGuide $status)
+    public function update(Request $request, Origin $origin, Destiny $destiny)
     {
         try {
-            $status->update($request->all());
-            $status->save();
-    
-            return $status;
+            $origin->update($request->all());
+            $origin->save();
+
+            $destiny->update($request->all());
+            $destiny->save();
+
+            return [$origin, $destiny];
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -79,13 +90,8 @@ class StatusGuideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StatusGuide $status)
+    public function destroy(Origin $origin, Destiny $destiny)
     {
-        try {
-            $status->delete();
-            return "elemento eliminado correctamente";
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        [$origin->delete(), $destiny->delete()];
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Guide;
-use App\Models\OriginDestiny;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -16,9 +15,13 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = new Guide();
+        try {
+            $shipments = new Guide();
 
-        return $shipments->all();
+            return $shipments->all();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -38,9 +41,16 @@ class ShipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guide $guide)
+    public function update(Request $request, Guide $guide)
     {
-        //
+        try {
+            $guide->update($request->all());
+            $guide->save();
+
+            return $guide;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -51,7 +61,11 @@ class ShipmentController extends Controller
      */
     public function destroy(Guide $guide)
     {
-        $guide->delete();
-        return "Element deleted";
+        try {
+            $guide->delete();
+            return "Guide deleted";
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

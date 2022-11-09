@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Guide;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\OwnGuideRequest;
+use App\Models\Destiny;
 use App\Models\Origin;
 use App\Models\OriginDestiny;
 use App\Models\RapiRadicado;
@@ -66,12 +67,19 @@ class OwnGuideController extends Controller
                 $guide->id_cliente = $request->IdCliente;
                 $guide->observaciones = $request->Observaciones;
                 $guide->shipping_pickup = $request->shipping_pickup;
-                //$guide->status_id = $request->status_id;
 
+                //$guide->status_id = $request->status_id;
                 $status = new StatusGuide();
                 $guide->status_id = $status->id = 1;
-
                 //$guide->status_id = $guide->first()->status->id = 1;
+
+                /* $origin = new Origin();
+                $guide->origin_id = $origin->id = 1; */
+                $guide->origin_id = $request->origin_id;
+
+                /* $destiny = new Destiny();
+                $guide->destiny_id = $destiny->id = 5; */
+                $guide->destiny_id = $request->destiny_id;
 
                 $guide->save();
 
@@ -100,7 +108,7 @@ class OwnGuideController extends Controller
         
                 $rapiradicado->save();
 
-                /* Crear GuideRequest para validacion */
+                /* TIENE QUE HABER UN CAMPO origin_id en guides e igual con destiny_id */
         
                 if( $request ) {
                     return response()->json([
@@ -120,7 +128,8 @@ class OwnGuideController extends Controller
                             'telefono' => $receiver->telefono,                        
                             'direccion' => $receiver->direccion,
                             'correo' => $receiver->correo,
-                            'status_id' => [$guide->status->name, $guide->status->color]
+                            'status_id' => [$guide->status->name, $guide->status->color],
+                            'origen y destino' => [$guide->origin->origin, $guide->destiny->destiny]
                         ]
                     ], 201);
                 }
@@ -128,16 +137,5 @@ class OwnGuideController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Guide $guide)
-    {
-        //
     }
 }

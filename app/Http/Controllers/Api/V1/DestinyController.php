@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Destiny;
 use Illuminate\Http\Request;
 
 class DestinyController extends Controller
@@ -14,7 +15,14 @@ class DestinyController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $destiny = new Destiny();
+            return response()->json([
+                $destiny->all()
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -25,7 +33,15 @@ class DestinyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $destiny = new Destiny();
+            $destiny->destiny = $request->destiny;
+            $destiny->save();
+
+            return $destiny;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -34,9 +50,9 @@ class DestinyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Destiny $destiny)
     {
-        //
+        return $destiny;
     }
 
     /**
@@ -46,9 +62,16 @@ class DestinyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Destiny $destiny)
     {
-        //
+        try {
+            $destiny->update($request->all());
+            $destiny->save();
+
+            return $destiny;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -57,8 +80,8 @@ class DestinyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Destiny $destiny)
     {
-        //
+        $destiny->delete();
     }
 }
