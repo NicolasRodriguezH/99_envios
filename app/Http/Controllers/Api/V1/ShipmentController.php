@@ -36,9 +36,6 @@ class ShipmentController extends Controller
                         ]),
                     ]
                 ]);
-            
-
-
         } catch (\Throwable $th) {
             throw $th;
         }
