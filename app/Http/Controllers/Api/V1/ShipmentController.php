@@ -23,7 +23,7 @@ class ShipmentController extends Controller
                 return response()->json([
                     'data' => [
                         'mis_envios' => $shipments->all([   
-                            'id_sucursal', 
+                            'dice_contener', 
                             'status_id',
                             'peso', 
                             'largo', 
@@ -32,7 +32,7 @@ class ShipmentController extends Controller
                             'aplica_contrapago',
                             'valor_declarado',
                             'created_at',
-                            'id_cliente'
+                            'urlguide'
                         ]),
                     ]
                 ]);
@@ -53,7 +53,7 @@ class ShipmentController extends Controller
             return response()->json([
                 'data' => [
                     'mis_envios' => [
-                        'seguimiento' => $shipment->id_sucursal,
+                        'seguimiento' => $shipment->dice_contener,
                         'estado' => $shipment->status->name,
                         'destino' => [
                             $shipment->receiver->nombre, 
@@ -68,7 +68,7 @@ class ShipmentController extends Controller
                         'guia valor' => $shipment->valor_declarado,
                         'usuario' => [
                             $shipment->created_at, 
-                            $shipment->id_cliente
+                            $shipment->urlguide
                         ],
                     ],
                 ]

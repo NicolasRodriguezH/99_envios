@@ -44,28 +44,32 @@ class OwnGuideController extends Controller
     {   
         try {
                 $guide = new Guide();
-                $guide->id_cliente_credito = $request->IdClienteCredito;
-                $guide->codigo_convenio_remitente = $request->CodigoConvenioRemitente;
-                $guide->id_tipo_entrega = $request->IdTipoEntrega;
+                $guide->valor_declarado = $request->ValorDeclarado;
+                $guide->nombre_tipo_envio = $request->NombreTipoEnvio;
                 $guide->aplica_contrapago = $request->AplicaContrapago;
-                $guide->id_servicio = $request->IdServicio;
+                $guide->peso_bruto = $request->peso_bruto;
+                $guide->unidad = $request->unidad;
+                $guide->dice_contener = $request->DiceContener;
+                $guide->observaciones = $request->Observaciones;
                 $guide->peso = $request->Peso;
                 $guide->largo = $request->Largo;
                 $guide->ancho = $request->Ancho;
                 $guide->alto = $request->Alto;
-                $guide->dice_contener = $request->DiceContener;
-                $guide->valor_declarado = $request->ValorDeclarado;
+                $guide->shipping_pickup = $request->shipping_pickup;
+                $guide->urlguide = $request->urlguide;
+                $guide->paquetes_guardados = $request->paquetes_guardados;
+
+                /* $guide->id_cliente_credito = $request->IdClienteCredito;
+                $guide->codigo_convenio_remitente = $request->CodigoConvenioRemitente;
+                $guide->id_tipo_entrega = $request->IdTipoEntrega;
+                $guide->id_servicio = $request->IdServicio;
                 $guide->id_tipo_envio = $request->IdTipoEnvio;
                 $guide->id_forma_pago = $request->IdFormaPago;
                 $guide->numero_pieza = $request->NumeroPieza;
                 $guide->descripcion_tipo_entrega = $request->DescripcionTipoEntrega;
-                $guide->nombre_tipo_envio = $request->NombreTipoEnvio;
                 $guide->codigo_convenio = $request->CodigoConvenio;
                 $guide->id_sucursal = $request->IdSucursal;
-                $guide->id_cliente = $request->IdCliente;
-                $guide->observaciones = $request->Observaciones;
-                $guide->shipping_pickup = $request->shipping_pickup;
-                $guide->urlguide = $request->urlguide;
+                $guide->id_cliente = $request->IdCliente; */
 
                 /* Primera opcion: Se asigna el request un campo status_id, se envia valor por el request, y el front podria poner un campo status_id en hidden si lo desea */
                 //$guide->status_id = $request->status_id;
@@ -86,23 +90,16 @@ class OwnGuideController extends Controller
                 $receiver->primer_apellido = $request->Destinatario['primerApellido'];
                 $receiver->segundo_apellido = $request->Destinatario['segundoApellido'];
                 $receiver->telefono = $request->Destinatario['telefono'];
+                $receiver->correo = $request->Destinatario['correo'];
                 $receiver->direccion = $request->Destinatario['direccion'];
-                $receiver->id_destinatario = $request->Destinatario['idDestinatario'];
+                /* $receiver->id_destinatario = $request->Destinatario['idDestinatario'];
                 $receiver->id_remitente = $request->Destinatario['idRemitente'];
                 $receiver->id_localidad = $request->Destinatario['idLocalidad'];
                 $receiver->codigo_convenio = $request->Destinatario['CodigoConvenio'];
-                $receiver->convenio_destinatario = $request->Destinatario['ConvenioDestinatario'];
-                $receiver->correo = $request->Destinatario['correo'];
+                $receiver->convenio_destinatario = $request->Destinatario['ConvenioDestinatario']; */
                 $receiver->guide_id = $guide->id;
                 
                 $receiver->save();
-                
-                $rapiradicado = new RapiRadicado();
-                $rapiradicado->numero_de_folios = $request->RapiRadicado['numerodeFolios'];
-                $rapiradicado->codigo_rapi_radicado = $request->RapiRadicado['CodigoRapiRadicado'];
-                $rapiradicado->guide_id = $guide->id;
-        
-                $rapiradicado->save();
         
                 if( $request ) {
                     return response()->json([

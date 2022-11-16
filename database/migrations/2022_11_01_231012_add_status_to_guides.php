@@ -16,7 +16,7 @@ class AddStatusToGuides extends Migration
         Schema::table('guides', function (Blueprint $table) {            
             $table->unsignedBigInteger('status_id')
             ->nullable()
-            ->after('observaciones');
+            ->after('alto');
             $table->foreign('status_id')
             ->references('id')
             ->on('status_guides')

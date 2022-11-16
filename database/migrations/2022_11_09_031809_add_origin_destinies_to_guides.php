@@ -16,7 +16,7 @@ class AddOriginDestiniesToGuides extends Migration
         Schema::table('guides', function (Blueprint $table) {
             $table->unsignedBigInteger('origin_id')
             ->nullable()
-            ->after('status_id');
+            ->after('shipping_pickup');
             $table->foreign('origin_id')
             ->references('id')
             ->on('origins');

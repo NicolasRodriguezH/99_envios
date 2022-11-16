@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\OriginDestinyController;
 use App\Http\Controllers\Api\V1\OwnGuideController;
 use App\Http\Controllers\Api\V1\ShipmentController;
 use App\Http\Controllers\Api\V1\StatusController;
+use App\Http\Controllers\Api\V1\StatusGuideController;
 use App\Models\Origin;
 use App\Models\StatusGuide;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('v1/generate', OwnGuideController::class)->names('generate');
 Route::apiResource('v1/shipments', ShipmentController::class)->names('shipments');
 
-Route::apiResource('v1/status', StatusGuide::class)->names('status');
+Route::apiResource('v1/status', StatusGuideController::class)->names('status');
 
 /* en caso de necesitarlo en front */
 Route::apiResource('v1/origin_destiny', OriginDestinyController::class)->names('origin_destiny');

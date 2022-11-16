@@ -15,7 +15,7 @@ class AddShippingPickupToGuides extends Migration
     {
         Schema::table('guides', function (Blueprint $table) {
             $table->boolean('shipping_pickup')
-            ->after('id_cliente');
+            ->after('status_id');
         });
     }
 
