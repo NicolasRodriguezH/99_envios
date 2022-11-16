@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\OwnGuideRequest;
 use App\Models\Destiny;
 use App\Models\Origin;
-use App\Models\RapiRadicado;
 use App\Models\Receiver;
 use App\Models\StatusGuide;
 
@@ -58,7 +57,6 @@ class OwnGuideController extends Controller
                 $guide->shipping_pickup = $request->shipping_pickup;
                 $guide->urlguide = $request->urlguide;
                 $guide->paquetes_guardados = $request->paquetes_guardados;
-
                 /* $guide->id_cliente_credito = $request->IdClienteCredito;
                 $guide->codigo_convenio_remitente = $request->CodigoConvenioRemitente;
                 $guide->id_tipo_entrega = $request->IdTipoEntrega;
@@ -70,6 +68,7 @@ class OwnGuideController extends Controller
                 $guide->codigo_convenio = $request->CodigoConvenio;
                 $guide->id_sucursal = $request->IdSucursal;
                 $guide->id_cliente = $request->IdCliente; */
+
 
                 /* Primera opcion: Se asigna el request un campo status_id, se envia valor por el request, y el front podria poner un campo status_id en hidden si lo desea */
                 //$guide->status_id = $request->status_id;
@@ -92,14 +91,13 @@ class OwnGuideController extends Controller
                 $receiver->telefono = $request->Destinatario['telefono'];
                 $receiver->correo = $request->Destinatario['correo'];
                 $receiver->direccion = $request->Destinatario['direccion'];
-                /* $receiver->id_destinatario = $request->Destinatario['idDestinatario'];
-                $receiver->id_remitente = $request->Destinatario['idRemitente'];
-                $receiver->id_localidad = $request->Destinatario['idLocalidad'];
-                $receiver->codigo_convenio = $request->Destinatario['CodigoConvenio'];
-                $receiver->convenio_destinatario = $request->Destinatario['ConvenioDestinatario']; */
                 $receiver->guide_id = $guide->id;
                 
                 $receiver->save();
+
+                //cotizacion - hacer cotizacion de service que seria con otra function o como ?
+
+                //pdf function - crear fucntion para pdf - NOW
         
                 if( $request ) {
                     return response()->json([

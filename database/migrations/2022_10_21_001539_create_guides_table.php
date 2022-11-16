@@ -16,7 +16,6 @@ class CreateGuidesTable extends Migration
         Schema::create('guides', function (Blueprint $table) {
             $table->id();
             //$table->string('cliente');
-            //$table->integer('codigo_convenio_remitente')->nullable();
             $table->decimal('valor_declarado')->nullable();
             //$table->integer('id_tipo_envio')->nullable(); // seria campo en relacion a tabla tipo_envio
             $table->string('nombre_tipo_envio', 50)->nullable(); // ¿ O se puede usar este campo ?

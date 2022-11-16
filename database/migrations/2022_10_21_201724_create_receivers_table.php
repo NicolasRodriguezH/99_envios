@@ -23,12 +23,6 @@ class CreateReceiversTable extends Migration
             $table->string('telefono', 25)->nullable();
             $table->string('correo')->nullable();
             $table->string('direccion', 250)->nullable();
-            
-            /* $table->integer('id_destinatario')->nullable(); // De aqui hacia abajo al parecer no se encesitaria
-            $table->integer('id_remitente')->nullable(); 
-            $table->string('id_localidad', 8)->nullable();
-            $table->integer('codigo_convenio')->nullable();
-            $table->integer('convenio_destinatario')->nullable(); */
             $table->unsignedBigInteger('guide_id');
             $table->foreign('guide_id')
             ->references('id')
