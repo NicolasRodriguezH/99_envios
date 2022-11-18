@@ -15,8 +15,8 @@ class CreateOriginsTable extends Migration
     {
         Schema::create('origins', function (Blueprint $table) {
             $table->id();
-            $table->string('origin')
-            ->nullable();
+            $table->string('origin')->nullable();
+            $table->decimal('valor_flete')->nullable();
             $table->timestamps();
         });
     }

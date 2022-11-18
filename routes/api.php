@@ -1,15 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CotizationController;
 use App\Http\Controllers\Api\V1\DestinyController;
 use App\Http\Controllers\Api\V1\OriginController;
 use App\Http\Controllers\Api\V1\OriginDestinyController;
 use App\Http\Controllers\Api\V1\OwnGuideController;
+use App\Http\Controllers\Api\V1\PdfController;
 use App\Http\Controllers\Api\V1\ShipmentController;
-use App\Http\Controllers\Api\V1\StatusController;
 use App\Http\Controllers\Api\V1\StatusGuideController;
-use App\Models\Origin;
-use App\Models\StatusGuide;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,10 +22,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 // V1
-Route::apiResource('v1/generate', OwnGuideController::class)->names('generate');
-Route::apiResource('v1/shipments', ShipmentController::class)->names('shipments');
+Route::apiResource('v1/generate', OwnGuideController::class)
+    ->names('generate');
 
-Route::apiResource('v1/status', StatusGuideController::class)->names('status');
+Route::apiResource('v1/cotization', CotizationController::class)
+    ->only('store');
 
-/* en caso de necesitarlo en front */
-Route::apiResource('v1/origin_destiny', OriginDestinyController::class)->names('origin_destiny');
+Route::apiResource('v1/pdf_generate', PdfController::class)
+    ->only('store');
+
+Route::apiResource('v1/shipments', ShipmentController::class)
+    ->names('shipments');
+
+Route::apiResource('v1/status', StatusGuideController::class)
+    ->names('status');
+
+/* En caso de necesitar agregar origen o destino desde interfaz */
+Route::apiResource('v1/origin_destiny', OriginDestinyController::class)
+    ->names('origin_destiny');

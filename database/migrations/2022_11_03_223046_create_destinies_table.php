@@ -15,13 +15,13 @@ class CreateDestiniesTable extends Migration
     {
         Schema::create('destinies', function (Blueprint $table) {
             $table->id();
-            $table->string('destiny')
-            ->nullable();
-            $table->unsignedBigInteger('origin_id')
+            $table->string('destiny')->nullable();
+            //$table->decimal('valor_flete')->nullable();
+            /* $table->unsignedBigInteger('origin_id')
             ->nullable();
             $table->foreign('origin_id')
                 ->references('id')
-                ->on('origins');
+                ->on('origins'); */
             $table->timestamps();
         });
     }

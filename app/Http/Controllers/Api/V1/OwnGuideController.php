@@ -9,6 +9,7 @@ use App\Models\Destiny;
 use App\Models\Origin;
 use App\Models\Receiver;
 use App\Models\StatusGuide;
+use Barryvdh\DomPDF\PDF;
 
 class OwnGuideController extends Controller
 {
