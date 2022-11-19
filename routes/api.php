@@ -28,8 +28,8 @@ Route::apiResource('v1/generate', OwnGuideController::class)
 Route::apiResource('v1/cotization', CotizationController::class)
     ->only('store');
 
-Route::apiResource('v1/pdf_generate', PdfController::class)
-    ->only('store');
+Route::post('v1/pdf_generate/{id}', [PdfController::class, 'generatePDF'])
+    ->name('pdf_generate');
 
 Route::apiResource('v1/shipments', ShipmentController::class)
     ->names('shipments');

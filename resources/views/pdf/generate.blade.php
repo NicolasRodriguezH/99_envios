@@ -7,6 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Parece ques si esta funcionando ishshs</p>
+    <header>
+        <h1 style="text-align: center"> Guia en PDF </h1>
+        <hr> <br>
+        <p style="text-align: center">{{ $guide->valor_declarado }}</p>
+        <p style="text-align: center">{{ $guide->nombre_tipo_envio }}</p>
+        <p style="text-align: center">{{ $guide->aplica_contrapago }}</p>
+        <p style="text-align: center">{{ $guide->peso_bruto }}</p>
+        <p style="text-align: center">{{ $guide->unidad }}</p>
+        <p style="text-align: center">{{ $guide->dice_contener }}</p>
+        <p style="text-align: center">{{ $guide->observaciones }}</p>
+        <p style="text-align: center">{{ $guide->shipping_pickup }}</p>
+        <p style="text-align: center">{{ $guide->urlguide }}</p>
+         
+        <p style="text-align: center">{{ $receiver->tipo_documento }}</p>
+        <p style="text-align: center">{{ $receiver->numero_documento }}</p>
+        <p style="text-align: center">{{ $receiver->nombre }}</p>
+        <p style="text-align: center">{{ $receiver->primer_apellido }}</p>
+        <p style="text-align: center">{{ $receiver->segundo_apellido }}</p>
+        <p style="text-align: center">{{ $receiver->telefono }}</p>
+        <p style="text-align: center">{{ $receiver->correo }}</p>
+        <p style="text-align: center">{{ $receiver->direccion }}</p>
+    </header>
+
+
+
+    
 </body>
 </html>

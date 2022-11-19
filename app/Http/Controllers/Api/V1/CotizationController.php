@@ -27,10 +27,10 @@ class CotizationController extends Controller
                 
                 $arraySum = $request->ValorDeclarado + $valor_flete;
 
-                $average = $arraySum * 3;
-                $average /= 100;
+                $percentage = $arraySum * 3;
+                $percentage /= 100;
 
-                $arraySum += $average;
+                $arraySum += $percentage;
 
             return response()->json([
                 'success' => true,

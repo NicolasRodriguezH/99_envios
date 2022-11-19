@@ -9,7 +9,8 @@ use App\Models\Destiny;
 use App\Models\Origin;
 use App\Models\Receiver;
 use App\Models\StatusGuide;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Http\Request;
 
 class OwnGuideController extends Controller
 {
@@ -95,10 +96,6 @@ class OwnGuideController extends Controller
                 $receiver->guide_id = $guide->id;
                 
                 $receiver->save();
-
-                //cotizacion - hacer cotizacion de service que seria con otra function o como ?
-
-                //pdf function - crear fucntion para pdf - NOW
         
                 if( $request ) {
                     return response()->json([
@@ -120,8 +117,8 @@ class OwnGuideController extends Controller
                             'correo' => $receiver->correo,
                             'urlguide' => $guide->urlguide,
                             'status_id' => [$guide->status->name, $guide->status->color],
-                            'origen y destino' => [$guide->origin->origin, $guide->destiny->destiny]
-                        ]
+                            'origen y destino' => [$guide->origin->origin, $guide->destiny->destiny],
+                        ],
                     ], 201);
                 }
 
