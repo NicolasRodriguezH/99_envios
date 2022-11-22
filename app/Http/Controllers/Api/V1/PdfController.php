@@ -20,7 +20,9 @@ class PdfController extends Controller
                 'receiver' => $receiver,
             ]);
 
-            return $pdf->download('guia_generada.pdf').$pdf->stream('guia_generada.pdf');
+            $pdf->setPaper('a4', 'landscape');
+
+            return $pdf->download('guia_generada.pdf');/* .$pdf->stream('guia_generada.pdf') */
 
         } catch (\Throwable $th) {
             throw $th;
