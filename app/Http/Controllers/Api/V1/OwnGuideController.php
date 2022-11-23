@@ -48,17 +48,17 @@ class OwnGuideController extends Controller
                 $guide->valor_declarado = $request->ValorDeclarado;
                 $guide->nombre_tipo_envio = $request->NombreTipoEnvio;
                 $guide->aplica_contrapago = $request->AplicaContrapago;
-                $guide->peso_bruto = $request->peso_bruto;
-                $guide->unidad = $request->unidad;
+                $guide->peso_bruto = $request->PesoBruto;
+                $guide->unidad = $request->Unidad;
                 $guide->dice_contener = $request->DiceContener;
                 $guide->observaciones = $request->Observaciones;
                 $guide->peso = $request->Peso;
                 $guide->largo = $request->Largo;
                 $guide->ancho = $request->Ancho;
                 $guide->alto = $request->Alto;
-                $guide->shipping_pickup = $request->shipping_pickup;
-                $guide->urlguide = $request->urlguide;
-                $guide->paquetes_guardados = $request->paquetes_guardados;
+                $guide->shipping_pickup = $request->ShippingPickup;
+                $guide->urlguide = $request->UrlGuide;
+                $guide->paquetes_guardados = $request->PaquetesGuardados;
                 /* $guide->id_cliente_credito = $request->IdClienteCredito;
                 $guide->codigo_convenio_remitente = $request->CodigoConvenioRemitente;
                 $guide->id_tipo_entrega = $request->IdTipoEntrega;
@@ -79,8 +79,8 @@ class OwnGuideController extends Controller
                 $status = new StatusGuide();
                 $guide->status_id = $status->id = 1;
 
-                $guide->origin_id = $request->origin_id;
-                $guide->destiny_id = $request->destiny_id;
+                $guide->origin_id = $request->OriginId;
+                $guide->destiny_id = $request->DestinyId;
 
                 $guide->save();
 
