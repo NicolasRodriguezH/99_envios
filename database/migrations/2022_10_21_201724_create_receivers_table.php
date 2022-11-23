@@ -23,7 +23,7 @@ class CreateReceiversTable extends Migration
             $table->string('telefono', 25)->nullable();
             $table->string('correo')->nullable();
             $table->string('direccion', 250)->nullable();
-            $table->unsignedBigInteger('guide_id');
+            $table->unsignedBigInteger('guide_id')->nullable();
             $table->foreign('guide_id')
             ->references('id')
             ->on('guides');

@@ -30,7 +30,7 @@ class CreateGuidesTable extends Migration
             $table->decimal('alto')->nullable();
             //$table->decimal('valor_flete')->nullable();
             $table->boolean('shipping_pickup')->nullable();
-            $table->string('urlguide');
+            $table->string('urlguide')->nullable();
 
             $table->string('paquetes_guardados')->nullable();
 
