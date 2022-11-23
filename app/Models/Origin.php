@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Origin extends Model
 {
-    protected $guarded = ['id', 'timestamps'];
+    protected $fillable = ['origin', 'valor_flete'];
     
     public function destinies() {
         return $this->hasMany(Destiny::class);

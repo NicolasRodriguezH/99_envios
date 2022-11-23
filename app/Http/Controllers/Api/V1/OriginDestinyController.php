@@ -38,11 +38,11 @@ class OriginDestinyController extends Controller
     {
         try {
             $origin = new Origin();
-                $origin->origin = $request->origin;
+                $origin->origin = $request->Origin;
                 $origin->save();
     
             $destiny = new Destiny();
-                $destiny->destiny = $request->destiny;
+                $destiny->destiny = $request->Destiny;
                 $destiny->save();
     
                 return [$origin, $destiny];
@@ -72,11 +72,13 @@ class OriginDestinyController extends Controller
     public function update(Request $request, Origin $origin, Destiny $destiny)
     {
         try {
-            $origin->update($request->all());
-            $origin->save();
+            $origin->update([
+                $origin->origin = $request->Origin
+            ]);
 
-            $destiny->update($request->all());
-            $destiny->save();
+            $destiny->update([
+                $destiny->destiny = $request->Destiny
+            ]);
 
             return [$origin, $destiny];
         } catch (\Throwable $th) {
@@ -90,12 +92,16 @@ class OriginDestinyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Origin $origin, Destiny $destiny)
+    public function destroy($origin_destiny)
     {
         try {
-            [$origin->delete(), $destiny->delete()];
+            $origin = new Origin();
+            $origin->destroy($origin_destiny);
+
+            /* $destiny = new Destiny();
+            $destiny->delete($origin_destiny); */
     
-            return "Element deleted";
+            return "Element's deleted";
         } catch (\Throwable $th) {
             throw $th;
         }

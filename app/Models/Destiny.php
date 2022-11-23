@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Destiny extends Model
 {
-    protected $guarded = ['id', 'timestamps'];
+    protected $fillable = ['destiny'];
 
     /* Relation one to many inverse */
     public function origin() {
