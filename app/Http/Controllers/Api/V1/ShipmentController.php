@@ -34,7 +34,7 @@ class ShipmentController extends Controller
                         'created_at',
                         'urlguide'
                     ]),
-                ]);
+                ], 200);
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -71,7 +71,7 @@ class ShipmentController extends Controller
                         ],
                     ],
                 ]
-            ]);   
+            ], 200);   
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -110,7 +110,9 @@ class ShipmentController extends Controller
     {
         try {
             $guide->delete();
-            return "Guide deleted";
+            return response()->json([
+                'guide_deleted' => "Guide deleted"
+            ], 200);
         } catch (\Throwable $th) {
             throw $th;
         }

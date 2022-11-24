@@ -30,5 +30,9 @@ class Guide extends Model
         return $this->belongsTo(Destiny::class);
     }
 
+    public function tipoEnvio() {
+        return $this->belongsTo(TipoEnvio::class);
+    }
+
     use HasFactory;
 }

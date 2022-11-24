@@ -28,7 +28,7 @@ class OwnGuideController extends Controller
             return response()->json([
                 'origen' => $origin->all(),
                 'destinos' => $destiny->all()
-            ]);
+            ], 200);
 
         } catch (\Throwable $th) {
             throw $th;
@@ -46,7 +46,8 @@ class OwnGuideController extends Controller
         try {
                 $guide = new Guide();
                 $guide->valor_declarado = $request->ValorDeclarado;
-                $guide->nombre_tipo_envio = $request->NombreTipoEnvio;
+                $guide->tipo_envio_id = $request->TipoEnvioId;
+                //$guide->nombre_tipo_envio = $request->NombreTipoEnvio;
                 $guide->aplica_contrapago = $request->AplicaContrapago;
                 $guide->peso_bruto = $request->PesoBruto;
                 $guide->unidad = $request->Unidad;
@@ -118,6 +119,7 @@ class OwnGuideController extends Controller
                             'urlguide' => $guide->urlguide,
                             'status_id' => [$guide->status->name, $guide->status->color],
                             'origen y destino' => [$guide->origin->origin, $guide->destiny->destiny],
+                            'tipo_envio_id' => $guide->tipoEnvio->nombre
                         ],
                     ], 201);
                 }

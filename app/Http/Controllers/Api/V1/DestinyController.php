@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Destiny;
-use App\Models\Origin;
 use Illuminate\Http\Request;
 
-class OriginDestinyController extends Controller
+class DestinyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,8 @@ class OriginDestinyController extends Controller
     public function index()
     {
         try {
-            $origin = new Origin();
             $destiny = new Destiny();
             return response()->json([
-                $origin->all(),
                 $destiny->all()
             ], 200);
         } catch (\Throwable $th) {
@@ -37,43 +34,68 @@ class OriginDestinyController extends Controller
     public function store(Request $request)
     {
         try {
-            $origin = new Origin();
-                $origin->origin = $request->Origin;
-                $origin->save();
-    
             $destiny = new Destiny();
                 $destiny->destiny = $request->Destiny;
                 $destiny->save();
     
                 return response()->json([
-                    'data' => [$origin, $destiny]
-                ], 200);
+                    'new_status' => $destiny->name
+                ], 201);
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    /* public function originDestroy($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Destiny $destiny)
+    {
+        return $destiny;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Destiny $destiny)
     {
         try {
-            $origin = new Origin();
-            $origin->destroy($id);
-    
-            return "Element origin deleted";
+            $destiny->update([
+                $destiny->destiny = $request->Destiny
+            ]);
+
+            return response()->json([
+                'status_updated' => $destiny->id
+            ], 200);
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    public function destinyDestroy($id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
         try {
             $destiny = new Destiny();
             $destiny->destroy($id);
     
-            return "Element destiny deleted";
+            return response()->json([
+                'status_deleted' => "Status $destiny->name deleted"
+            ], 200);
         } catch (\Throwable $th) {
             throw $th;
         }
-    } */
+    }
 }

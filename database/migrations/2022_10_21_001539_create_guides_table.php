@@ -17,8 +17,8 @@ class CreateGuidesTable extends Migration
             $table->id();
             //$table->string('cliente');
             $table->decimal('valor_declarado')->nullable();
-            //$table->integer('id_tipo_envio')->nullable(); // seria campo en relacion a tabla tipo_envio
-            $table->string('nombre_tipo_envio', 50)->nullable(); // ¿ O se puede usar este campo ?
+            //$table->integer('tipo_envio_id')->nullable(); // seria campo en relacion id de tabla tipo_envio
+            //$table->string('nombre_tipo_envio', 50)->nullable(); // ¿ O se puede usar este campo ?
             $table->boolean('aplica_contrapago')->nullable();
             $table->integer('peso_bruto'); // 1Kg
             $table->string('unidad'); // Kg / Lb - me suena mas este
@@ -28,20 +28,11 @@ class CreateGuidesTable extends Migration
             $table->decimal('largo')->nullable();
             $table->decimal('ancho')->nullable();
             $table->decimal('alto')->nullable();
-            //$table->decimal('valor_flete')->nullable();
+            //$table->decimal('valor_flete')->nullable(); //campo ubicado en origins_table
             $table->boolean('shipping_pickup')->nullable();
             $table->string('urlguide')->nullable();
 
             $table->string('paquetes_guardados')->nullable();
-
-
-            /* Estos campos, podrian servir para el PDF? */
-
-            /* $table->integer('id_forma_pago')->nullable();
-            $table->integer('numero_pieza')->nullable();
-            $table->string('descripcion_tipo_entrega', 50)->nullable();
-            $table->integer('codigo_convenio')->nullable();
-            $table->integer('id_sucursal')->nullable(); */
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Status;
 use App\Models\StatusGuide;
+use App\Models\TipoEnvio;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusGuideSeeder::class);
         $this->call(OriginSeeder::class);
         $this->call(DestinySeeder::class);
+        $this->call(TipoEnvioSeeder::class);
     }
 }

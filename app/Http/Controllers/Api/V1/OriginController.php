@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\StatusGuide;
+use App\Models\Origin;
 use Illuminate\Http\Request;
 
-class StatusGuideController extends Controller
+class OriginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class StatusGuideController extends Controller
     public function index()
     {
         try {
-            $status = new StatusGuide();
+            $origin = new Origin();
             return response()->json([
-                $status->all()
+                $origin->all()
             ], 200);
         } catch (\Throwable $th) {
             throw $th;
@@ -34,14 +34,13 @@ class StatusGuideController extends Controller
     public function store(Request $request)
     {
         try {
-            $status = new StatusGuide();
-            $status->name = $request->Name;
-            $status->color = $request->Color;
-            $status->save();
+            $origin = new Origin();
+                $origin->origin = $request->Origin;
+                $origin->save();
     
-            return response()->json([
-                'new_status' => $status->name
-            ], 201);
+                return response()->json([
+                    'new_origin' => $origin->origin
+                ], 201);
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -53,9 +52,9 @@ class StatusGuideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(StatusGuide $status)
+    public function show(Origin $origin)
     {
-        return $status;
+        return $origin;
     }
 
     /**
@@ -65,16 +64,15 @@ class StatusGuideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StatusGuide $status)
+    public function update(Request $request, Origin $origin)
     {
         try {
-            $status->update([
-                $status->name = $request->Name,
-                $status->color = $request->Color
+            $origin->update([
+                $origin->origin = $request->Origin
             ]);
-    
+
             return response()->json([
-                'status_updated' => $status->id
+                'status_updated' => $origin->origin
             ], 200);
         } catch (\Throwable $th) {
             throw $th;
@@ -87,12 +85,17 @@ class StatusGuideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StatusGuide $status)
+    public function destroy($id)
     {
         try {
-            $status->delete();
+            $origin = new Origin();
+            $origin->destroy($id);
+
+            /* $destiny = new Destiny();
+            $destiny->delete($origin_destiny); */
+    
             return response()->json([
-                'status_deleted' => "Status $status->name deleted"
+                'status_deleted' => "Status $origin->name deleted"
             ], 200);
         } catch (\Throwable $th) {
             throw $th;

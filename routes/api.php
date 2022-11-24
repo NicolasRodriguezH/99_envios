@@ -39,10 +39,13 @@ Route::apiResource('v1/status', StatusGuideController::class)
     ->names('status');
 
 /* En caso de necesitar agregar origen o destino desde interfaz */
+Route::apiResource('v1/origin', OriginController::class)
+    ->names('origin');
+Route::apiResource('v1/destiny', DestinyController::class)
+    ->names('destiny');
 Route::apiResource('v1/origin_destiny', OriginDestinyController::class)
     ->names('origin_destiny');
 
     // Ruta para crear la guia masiva
-    /* Se puede llamar import tambien */
 Route::post('v1/guide_massive', [GuideMassiveExcelController::class, 'createMassiveGuides'])
     ->name('guide_massive');

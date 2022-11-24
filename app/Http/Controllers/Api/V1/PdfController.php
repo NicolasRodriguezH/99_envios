@@ -22,7 +22,9 @@ class PdfController extends Controller
 
             $pdf->setPaper('a4', 'landscape');
 
-            return $pdf->download('guia_generada.pdf');/* .$pdf->stream('guia_generada.pdf') */
+            return response()->json([
+                'download' => $pdf->download('guia_generada.pdf')/* .$pdf->stream('guia_generada.pdf') */
+            ], 200);
 
         } catch (\Throwable $th) {
             throw $th;
