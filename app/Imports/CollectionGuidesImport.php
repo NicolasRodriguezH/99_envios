@@ -27,7 +27,6 @@ class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkR
         foreach ($collection as $row) {
             Guide::create([
                 'valor_declarado' => (integer) $row['valordeclarado'],
-                'nombre_tipo_envio' => $row['nombretipoenvio'],
                 'aplica_contrapago' => $row['aplicacontrapago'],
                 'peso_bruto' => (integer) $row['pesobruto'],
                 'unidad' => $row['unidad'],

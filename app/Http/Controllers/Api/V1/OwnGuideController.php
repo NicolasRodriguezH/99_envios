@@ -89,9 +89,19 @@ class OwnGuideController extends Controller
                 
                 $receiver->save();
         
-                if( $request ) {
+                if( !empty($guide && $request) ) {
+
+                    $pdf = PDF::loadView('pdf.generate', [
+                        'guide' => $guide,
+                        'receiver' => $receiver,
+                    ]);
+        
+                    $pdf->setPaper('a4', 'landscape');
+                    
+                    $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
                     return response()->json([
                         'data' => [
+                            'success' => 'PDF generado y descargado con exito',
                             'user' => $guide->user->name,
                             'guia' => $guide->id,
                             'contrapago' => $guide->aplica_contrapago,

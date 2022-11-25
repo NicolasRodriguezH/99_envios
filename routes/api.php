@@ -23,14 +23,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // V1
-Route::apiResource('v1/generate', OwnGuideController::class)
+Route::resource('v1/generate', OwnGuideController::class)
     ->names('generate');
 
 Route::apiResource('v1/cotization', CotizationController::class)
     ->only('store')->names('cotization');
 
-Route::post('v1/pdf_generate/{id}', [PdfController::class, 'generatePDF'])
-    ->name('pdf_generate');
+/* Route::get('v1/pdf_generate/{id}', [PdfController::class, 'generatePDF'])
+    ->name('pdf_generate'); */
 
 Route::apiResource('v1/shipments', ShipmentController::class)
     ->names('shipments');

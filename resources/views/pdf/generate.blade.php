@@ -11,7 +11,7 @@
         <h1 style="text-align: center"> Guia en PDF </h1>
         <hr> <br>
         <p style="text-align: center">{{ $guide->valor_declarado }}</p>
-        <p style="text-align: center">{{ $guide->nombre_tipo_envio }}</p>
+        <p style="text-align: center">{{ $guide->tipoEnvio->nombre }}</p>
         <p style="text-align: center">{{ $guide->aplica_contrapago }}</p>
         <p style="text-align: center">{{ $guide->peso_bruto }}</p>
         <p style="text-align: center">{{ $guide->unidad }}</p>
