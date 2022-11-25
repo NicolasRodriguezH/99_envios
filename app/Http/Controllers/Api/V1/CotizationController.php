@@ -22,20 +22,26 @@ class CotizationController extends Controller
     {
         try {
             /* Calcular valor_flete mas contrapago de ser elegido */
-                $origin = new Origin();
-                $valor_flete = $origin->find(2)->valor_flete;
-                
-                $arraySum = $request->ValorDeclarado + $valor_flete;
+            if ($request->AplicaContrapago === true) {
+                    $origin = new Origin();
+                    $valor_flete = $origin->find($request->OriginId)->valor_flete;
+                    
+                    $arraySum = $request->ValorDeclarado + $valor_flete;
 
-                $percentage = $arraySum * 3;
-                $percentage /= 100;
+                    $percentage = $arraySum * 3;
+                    $percentage /= 100;
 
-                $arraySum += $percentage;
+                    $arraySum += $percentage;
+
+                return response()->json([
+                    'success' => true,
+                    'cotizacion' => round($arraySum, 0),
+                ], 201);
+            }
 
             return response()->json([
-                'success' => true,
-                'cotizacion' => round($arraySum, 0),
-            ], 201);
+                'success' => $request->AplicaContrapago
+            ], 200);
             
         } catch (\Throwable $th) {
             throw $th;

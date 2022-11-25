@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OriginSeeder::class);
         $this->call(DestinySeeder::class);
         $this->call(TipoEnvioSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

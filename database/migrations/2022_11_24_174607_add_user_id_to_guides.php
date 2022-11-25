@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTipoEnviosToGuides extends Migration
+class AddUserIdToGuides extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ class AddTipoEnviosToGuides extends Migration
     public function up()
     {
         Schema::table('guides', function (Blueprint $table) {
-            $table->unsignedBigInteger('tipo_envio_id')
+            $table->unsignedBigInteger('user_id')
             ->nullable()
-            ->after('destiny_id');
-            $table->foreign('tipo_envio_id')
+            ->after('tipo_envio_id');
+            $table->foreign('user_id')
             ->references('id')
-            ->on('tipo_envios');
+            ->on('users');
         });
     }
 

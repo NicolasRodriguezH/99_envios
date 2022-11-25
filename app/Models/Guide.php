@@ -9,6 +9,10 @@ class Guide extends Model
 {
     protected $guarded = ['id', 'timestamps'];
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     public function receiver() {
         return $this->hasOne(Receiver::class);
     }

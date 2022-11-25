@@ -46,6 +46,5 @@ Route::apiResource('v1/destiny', DestinyController::class)
 Route::apiResource('v1/origin_destiny', OriginDestinyController::class)
     ->names('origin_destiny');
 
-    // Ruta para crear la guia masiva
 Route::post('v1/guide_massive', [GuideMassiveExcelController::class, 'createMassiveGuides'])
     ->name('guide_massive');

@@ -47,7 +47,6 @@ class OwnGuideController extends Controller
                 $guide = new Guide();
                 $guide->valor_declarado = $request->ValorDeclarado;
                 $guide->tipo_envio_id = $request->TipoEnvioId;
-                //$guide->nombre_tipo_envio = $request->NombreTipoEnvio;
                 $guide->aplica_contrapago = $request->AplicaContrapago;
                 $guide->peso_bruto = $request->PesoBruto;
                 $guide->unidad = $request->Unidad;
@@ -60,19 +59,13 @@ class OwnGuideController extends Controller
                 $guide->shipping_pickup = $request->ShippingPickup;
                 $guide->urlguide = $request->UrlGuide;
                 $guide->paquetes_guardados = $request->PaquetesGuardados;
-                /* $guide->id_cliente_credito = $request->IdClienteCredito;
-                $guide->codigo_convenio_remitente = $request->CodigoConvenioRemitente;
-                $guide->id_tipo_entrega = $request->IdTipoEntrega;
-                $guide->id_servicio = $request->IdServicio;
-                $guide->id_tipo_envio = $request->IdTipoEnvio;
-                $guide->id_forma_pago = $request->IdFormaPago;
-                $guide->numero_pieza = $request->NumeroPieza;
-                $guide->descripcion_tipo_entrega = $request->DescripcionTipoEntrega;
-                $guide->codigo_convenio = $request->CodigoConvenio;
-                $guide->id_sucursal = $request->IdSucursal;
-                $guide->id_cliente = $request->IdCliente; */
+                $guide->origin_id = $request->OriginId;
+                $guide->destiny_id = $request->DestinyId;
 
+                $guide->user_id = 1;
+                //$guide->user_id = auth()->id();
 
+                //Status
                 /* Primera opcion: Se asigna el request un campo status_id, se envia valor por el request, y el front podria poner un campo status_id en hidden si lo desea */
                 //$guide->status_id = $request->status_id;
 
@@ -80,8 +73,6 @@ class OwnGuideController extends Controller
                 $status = new StatusGuide();
                 $guide->status_id = $status->id = 1;
 
-                $guide->origin_id = $request->OriginId;
-                $guide->destiny_id = $request->DestinyId;
 
                 $guide->save();
 
@@ -101,7 +92,7 @@ class OwnGuideController extends Controller
                 if( $request ) {
                     return response()->json([
                         'data' => [
-                            'res' => "guia generada satisfactoriamente",
+                            'user' => $guide->user->name,
                             'guia' => $guide->id,
                             'contrapago' => $guide->aplica_contrapago,
                             'contenido' => $guide->dice_contener,
