@@ -13,8 +13,6 @@ class GuideMassiveExcelController extends Controller
     public function createMassiveGuides() {
 
         try {
-            //$guia = (new GuidesImport)->import(request()->file('file'));
-            //$destino = (new ReceiversImport)->import(request()->file('file'));
             $collection = (new CollectionGuidesImport)->import(request()->file('file'));
 
             if ($collection) {

@@ -26,7 +26,8 @@ class CreateReceiversTable extends Migration
             $table->unsignedBigInteger('guide_id')->nullable();
             $table->foreign('guide_id')
             ->references('id')
-            ->on('guides');
+            ->on('guides')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

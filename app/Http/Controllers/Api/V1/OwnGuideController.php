@@ -58,21 +58,23 @@ class OwnGuideController extends Controller
                 $guide->alto = $request->Alto;
                 $guide->shipping_pickup = $request->ShippingPickup;
                 $guide->urlguide = $request->UrlGuide;
-                $guide->paquetes_guardados = $request->PaquetesGuardados;
+                //$guide->paquetes_guardados = $request->PaquetesGuardados;
                 $guide->origin_id = $request->OriginId;
                 $guide->destiny_id = $request->DestinyId;
 
                 $guide->user_id = 1;
                 //$guide->user_id = auth()->id();
 
+
                 //Status
                 /* Primera opcion: Se asigna el request un campo status_id, se envia valor por el request, y el front podria poner un campo status_id en hidden si lo desea */
+
                 //$guide->status_id = $request->status_id;
 
                 /* Segunda opcion: seria solo llamando al modelo de status y asignando el valor id 1 que es igual a "creado", "REVISAR CUAL PODRIA USAR MEJOR"*/
+                
                 $status = new StatusGuide();
                 $guide->status_id = $status->id = 1;
-
 
                 $guide->save();
 

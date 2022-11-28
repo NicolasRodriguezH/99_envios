@@ -29,7 +29,7 @@ class CreateGuidesTable extends Migration
             $table->boolean('shipping_pickup')->nullable();
             $table->string('urlguide')->nullable();
 
-            $table->string('paquetes_guardados')->nullable();
+            //$table->string('paquetes_guardados')->nullable();
             $table->timestamps();
         });
     }

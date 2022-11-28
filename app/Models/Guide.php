@@ -17,10 +17,6 @@ class Guide extends Model
         return $this->hasOne(Receiver::class);
     }
 
-    public function rapiRadicado() {
-        return $this->hasOne(RapiRadicado::class);
-    }
-
     /* Relacion uno a muchos (inversa) */
     public function status() {
         return $this->belongsTo(StatusGuide::class);

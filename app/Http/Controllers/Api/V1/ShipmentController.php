@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\OwnGuideRequest;
 use App\Models\Guide;
+use App\Models\Receiver;
 use App\Models\StatusGuide;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,7 @@ class ShipmentController extends Controller
     {
         try {
             $shipments = new Guide();
+            $receiver = new Receiver();
 
                 return response()->json([
                     'mis_envios' => $shipments->all([   
@@ -33,6 +35,13 @@ class ShipmentController extends Controller
                         'valor_declarado',
                         'created_at',
                         'urlguide'
+                    ]),
+                    'receiver' => $receiver->all([
+                        'nombre',
+                        'primer_apellido',
+                        'telefono',
+                        'correo',
+                        'direccion'
                     ]),
                 ], 200);
         } catch (\Throwable $th) {

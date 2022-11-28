@@ -38,12 +38,12 @@ Route::apiResource('v1/shipments', ShipmentController::class)
 Route::apiResource('v1/status', StatusGuideController::class)
     ->names('status');
 
-/* En caso de necesitar agregar origen o destino desde interfaz */
+/* Origen / Destino */
 Route::apiResource('v1/origin', OriginController::class)
     ->names('origin');
 Route::apiResource('v1/destiny', DestinyController::class)
     ->names('destiny');
-Route::apiResource('v1/origin_destiny', OriginDestinyController::class)
+Route::resource('v1/origin_destiny/{origin}', OriginDestinyController::class)
     ->names('origin_destiny');
 
 Route::post('v1/guide_massive', [GuideMassiveExcelController::class, 'createMassiveGuides'])
