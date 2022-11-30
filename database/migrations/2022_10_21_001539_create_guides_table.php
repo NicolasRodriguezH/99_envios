@@ -25,11 +25,8 @@ class CreateGuidesTable extends Migration
             $table->decimal('largo')->nullable();
             $table->decimal('ancho')->nullable();
             $table->decimal('alto')->nullable();
-            //$table->decimal('valor_flete')->nullable(); //campo ubicado en origins_table
-            $table->boolean('shipping_pickup')->nullable();
+            $table->boolean('recogida_envio')->nullable();
             $table->string('urlguide')->nullable();
-
-            //$table->string('paquetes_guardados')->nullable();
             $table->timestamps();
         });
     }

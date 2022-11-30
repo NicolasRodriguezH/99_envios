@@ -9,8 +9,7 @@ use App\Models\Destiny;
 use App\Models\Origin;
 use App\Models\Receiver;
 use App\Models\StatusGuide;
-use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class OwnGuideController extends Controller
 {
@@ -56,9 +55,8 @@ class OwnGuideController extends Controller
                 $guide->largo = $request->Largo;
                 $guide->ancho = $request->Ancho;
                 $guide->alto = $request->Alto;
-                $guide->shipping_pickup = $request->ShippingPickup;
+                $guide->recogida_envio = $request->RecogidaEnvio;
                 $guide->urlguide = $request->UrlGuide;
-                //$guide->paquetes_guardados = $request->PaquetesGuardados;
                 $guide->origin_id = $request->OriginId;
                 $guide->destiny_id = $request->DestinyId;
 
@@ -94,13 +92,13 @@ class OwnGuideController extends Controller
                 if( !empty($guide && $request) ) {
 
                     $pdf = PDF::loadView('pdf.generate', [
-                        'guide' => $guide,
-                        'receiver' => $receiver,
+                        'guide' => $guide
                     ]);
         
                     $pdf->setPaper('a4', 'landscape');
                     
                     $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
+
                     return response()->json([
                         'data' => [
                             'success' => 'PDF generado y descargado con exito',
@@ -114,11 +112,11 @@ class OwnGuideController extends Controller
                             'alto' => $guide->alto,
                             'valor' => $guide->valor_declarado,
                             'observaciones' => $guide->observaciones,
-                            'nombre' => $receiver->nombre,
-                            'primerApellido' => $receiver->primer_apellido,
-                            'telefono' => $receiver->telefono,                        
-                            'direccion' => $receiver->direccion,
-                            'correo' => $receiver->correo,
+                            'nombre_destinatario' => $guide->receiver->nombre,
+                            'primerApellido' => $guide->receiver->primer_apellido,
+                            'telefono' => $guide->receiver->telefono,                        
+                            'direccion' => $guide->receiver->direccion,
+                            'correo' => $guide->receiver->correo,
                             'urlguide' => $guide->urlguide,
                             'status_id' => [$guide->status->name, $guide->status->color],
                             'origen y destino' => [$guide->origin->origin, $guide->destiny->destiny],

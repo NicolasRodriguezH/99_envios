@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // V1
-Route::resource('v1/generate', OwnGuideController::class)
+Route::apiResource('v1/generate', OwnGuideController::class)
     ->names('generate');
 
 Route::apiResource('v1/cotization', CotizationController::class)
@@ -43,8 +43,10 @@ Route::apiResource('v1/origin', OriginController::class)
     ->names('origin');
 Route::apiResource('v1/destiny', DestinyController::class)
     ->names('destiny');
-Route::resource('v1/origin_destiny/{origin}', OriginDestinyController::class)
-    ->names('origin_destiny');
+/* Route::resource('v1/origin_destiny', OriginDestinyController::class)
+    ->names('origin_destiny'); // Este endpoint se eliminaría */
 
 Route::post('v1/guide_massive', [GuideMassiveExcelController::class, 'createMassiveGuides'])
     ->name('guide_massive');
+
+/* NewReport MODULE */

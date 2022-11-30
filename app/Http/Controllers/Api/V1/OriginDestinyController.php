@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class OriginDestinyController extends Controller
 {
+
+    /* ESTE CONTROLADOR SE ELIMINARÍA */
+
     /**
      * Display a listing of the resource.
      *

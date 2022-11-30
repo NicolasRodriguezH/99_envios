@@ -4,13 +4,15 @@ namespace App\Imports;
 
 use App\Models\Guide;
 use App\Models\Receiver;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkReading
+class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkReading, WithBatchInserts
 {
     use Importable;
 
@@ -48,6 +50,12 @@ class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkR
                 'direccion' => $row['direccion'],
             ]);
         }
+    }
+
+    //por si fuesen archivos muy grandes
+    public function batchSize(): int
+    {
+        return 500;   
     }
 
     //por si fuesen archivos muy grandes

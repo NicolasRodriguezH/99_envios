@@ -34,14 +34,15 @@ class ShipmentController extends Controller
                         'aplica_contrapago',
                         'valor_declarado',
                         'created_at',
-                        'urlguide'
+                        'urlguide',
                     ]),
                     'receiver' => $receiver->all([
+                        'guide_id',
                         'nombre',
                         'primer_apellido',
                         'telefono',
                         'correo',
-                        'direccion'
+                        'direccion',
                     ]),
                 ], 200);
         } catch (\Throwable $th) {

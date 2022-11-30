@@ -22,20 +22,25 @@ class CotizationController extends Controller
     {
         try {
             /* Calcular valor_flete mas contrapago de ser elegido */
+            /* Al cliente solo le muestra el valor del flete, independientemente del valor declarado */
+
+            /* Si no aplica contrapago se le cobra solo el flete = varia */
+
             if ($request->AplicaContrapago === true) {
                     $origin = new Origin();
                     $valor_flete = $origin->find($request->OriginId)->valor_flete;
                     
-                    $arraySum = $request->ValorDeclarado + $valor_flete;
+                    //$cotizacion = $request->ValorDeclarado + $valor_flete;
+                    //$valor_flete = $origin->valor_flete;
 
-                    $percentage = $arraySum * 3;
+                    $percentage = $valor_flete * 3; // Porcentaje 3 es variable - SE MANEJA DEL OTRO LADO
                     $percentage /= 100;
 
-                    $arraySum += $percentage;
+                    $valor_flete += $percentage;
 
                 return response()->json([
                     'success' => true,
-                    'cotizacion' => round($arraySum, 0),
+                    'cotizacion' => round($valor_flete, 0),
                 ], 201);
             }
 
