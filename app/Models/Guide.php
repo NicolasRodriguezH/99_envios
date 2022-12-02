@@ -34,5 +34,9 @@ class Guide extends Model
         return $this->belongsTo(TipoEnvio::class);
     }
 
+    public function novelty() {
+        return $this->belongsTo(Novelty::class);
+    }
+
     use HasFactory;
 }

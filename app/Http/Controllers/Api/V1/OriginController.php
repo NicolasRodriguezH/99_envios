@@ -90,9 +90,6 @@ class OriginController extends Controller
         try {
             $origin = new Origin();
             $origin->destroy($id);
-
-            /* $destiny = new Destiny();
-            $destiny->delete($origin_destiny); */
     
             return response()->json([
                 'status_deleted' => "Status $origin->name deleted"

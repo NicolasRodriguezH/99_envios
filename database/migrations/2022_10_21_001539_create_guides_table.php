@@ -17,8 +17,8 @@ class CreateGuidesTable extends Migration
             $table->id();
             $table->decimal('valor_declarado')->nullable();
             $table->boolean('aplica_contrapago')->nullable();
-            $table->integer('peso_bruto'); // 1Kg
-            $table->string('unidad'); // Kg / Lb - me suena mas este
+            $table->integer('peso_bruto')->nullable(); // 1Kg
+            $table->string('unidad')->nullable(); // Kg / Lb - me suena mas este
             $table->string('dice_contener', 50)->nullable();
             $table->string('observaciones', 250)->nullable();
             $table->decimal('peso')->nullable();

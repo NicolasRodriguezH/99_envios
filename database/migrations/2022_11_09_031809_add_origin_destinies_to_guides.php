@@ -19,14 +19,16 @@ class AddOriginDestiniesToGuides extends Migration
             ->after('status_id');
             $table->foreign('origin_id')
             ->references('id')
-            ->on('origins');
+            ->on('origins')
+            ->onDelete('cascade');
 
             $table->unsignedBigInteger('destiny_id')
             ->nullable()
             ->after('origin_id');
             $table->foreign('destiny_id')
             ->references('id')
-            ->on('destinies');
+            ->on('destinies')
+            ->onDelete('cascade');
         });
     }
 

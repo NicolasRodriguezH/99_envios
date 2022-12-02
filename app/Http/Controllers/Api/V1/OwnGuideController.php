@@ -59,6 +59,9 @@ class OwnGuideController extends Controller
                 $guide->urlguide = $request->UrlGuide;
                 $guide->origin_id = $request->OriginId;
                 $guide->destiny_id = $request->DestinyId;
+                //$novelty = new Novelty();
+                //$guide->novelty_id = $novelty->novelty = 3;
+                //$guide->novelty_id = $request->NovedadId;
 
                 $guide->user_id = 1;
                 //$guide->user_id = auth()->id();
@@ -120,7 +123,8 @@ class OwnGuideController extends Controller
                             'urlguide' => $guide->urlguide,
                             'status_id' => [$guide->status->name, $guide->status->color],
                             'origen y destino' => [$guide->origin->origin, $guide->destiny->destiny],
-                            'tipo_envio_id' => $guide->tipoEnvio->nombre
+                            'tipo_envio_id' => $guide->tipoEnvio->nombre,
+                            //'novedad' => $guide->novelty->novelty,
                         ],
                     ], 201);
                 }

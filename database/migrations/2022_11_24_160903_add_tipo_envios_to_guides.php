@@ -19,7 +19,8 @@ class AddTipoEnviosToGuides extends Migration
             ->after('destiny_id');
             $table->foreign('tipo_envio_id')
             ->references('id')
-            ->on('tipo_envios');
+            ->on('tipo_envios')
+            ->onDelete('cascade');
         });
     }
 

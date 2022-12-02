@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\CotizationController;
 use App\Http\Controllers\Api\V1\DestinyController;
 use App\Http\Controllers\Api\V1\GuideMassiveExcelController;
+use App\Http\Controllers\Api\V1\NoveltyController;
 use App\Http\Controllers\Api\V1\OriginController;
 use App\Http\Controllers\Api\V1\OriginDestinyController;
 use App\Http\Controllers\Api\V1\OwnGuideController;
@@ -49,4 +50,6 @@ Route::apiResource('v1/destiny', DestinyController::class)
 Route::post('v1/guide_massive', [GuideMassiveExcelController::class, 'createMassiveGuides'])
     ->name('guide_massive');
 
-/* NewReport MODULE */
+/* Novedad MODULE */
+Route::apiResource('v1/novelties', NoveltyController::class)
+    ->names('novelties');
