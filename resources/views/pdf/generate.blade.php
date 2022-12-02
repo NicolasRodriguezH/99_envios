@@ -27,6 +27,10 @@
         <p style="text-align: center">{{ $guide->receiver->telefono }}</p>
         <p style="text-align: center">{{ $guide->receiver->correo }}</p>
         <p style="text-align: center">{{ $guide->receiver->direccion }}</p>
+        <p style="text-align: center">
+            {!! DNS1D::getBarcodeHTML($guide->id, 'EAN2') !!}
+        </p>
+
 
         <hr> <br>
         {{-- <p style="text-align: center">{{ $guide->valor_declarado }}</p>

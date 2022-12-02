@@ -94,15 +94,19 @@ class OwnGuideController extends Controller
         
                 if( !empty($guide && $request) ) {
 
+                    
+
+
                     $pdf = PDF::loadView('pdf.generate', [
-                        'guide' => $guide
+                        'guide' => $guide,/* 
+                        'code' => $code */
                     ]);
         
                     $pdf->setPaper('a4', 'landscape');
                     
-                    $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
+                    return $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
 
-                    return response()->json([
+                   /*  return response()->json([
                         'data' => [
                             'success' => 'PDF generado y descargado con exito',
                             'user' => $guide->user->name,
@@ -126,7 +130,7 @@ class OwnGuideController extends Controller
                             'tipo_envio_id' => $guide->tipoEnvio->nombre,
                             //'novedad' => $guide->novelty->novelty,
                         ],
-                    ], 201);
+                    ], 201); */
                 }
 
         } catch (\Throwable $th) {
