@@ -42,7 +42,7 @@
                 <div class="text-center inline-block">{{ $guide->receiver->correo }}</div>
                 <div class="text-center inline-block">{{ $guide->receiver->direccion }}</div>
             </div> --}}
-            <div class="justify-items-center">
+            <div class="grid grid-cols-2 gap-4 place-content-around">
                 <table class="table-auto">
                     <thead>
                         <tr>
@@ -52,36 +52,36 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ $guide->valor_declarado }}</td>
-                            <td>{{ $guide->receiver->tipo_documento }}</td>
+                            <td>Valor declarado: {{ $guide->valor_declarado }}</td>
+                            <td>Tipo de documento: {{ $guide->receiver->tipo_documento }}</td>
                         </tr>
                         <tr>
-                            <td>{{ $guide->aplica_contrapago }}</td>
-                            <td>{{ $guide->receiver->numero_documento }}</td>
+                            <td>Aplica contrapago: {{ $guide->aplica_contrapago }}</td>
+                            <td>Numero de documento: {{ $guide->receiver->numero_documento }}</td>
                         </tr>
                         <tr>
-                            <td>{{ $guide->peso_bruto }}</td>
-                            <td>{{ $guide->receiver->nombre }}</td>
+                            <td>Peso bruto: {{ $guide->peso_bruto }}</td>
+                            <td>Nombre destinatario: {{ $guide->receiver->nombre }}</td>
                         </tr>
                         <tr>
-                            <td>{{ $guide->unidad }}</td>
-                            <td>{{ $guide->receiver->primer_apellido }}</td>
+                            <td>Unidades: {{ $guide->unidad }}</td>
+                            <td>Primer apellido: {{ $guide->receiver->primer_apellido }}</td>
                         </tr>
                         <tr>
-                            <td>{{ $guide->dice_contener }}</td>
-                            <td>{{ $guide->receiver->segundo_apellido }}</td>
+                            <td>Dice contener: {{ $guide->dice_contener }}</td>
+                            <td>Segundo apellido: {{ $guide->receiver->segundo_apellido }}</td>
                         </tr>
                         <tr>
-                            <td>{{ $guide->observaciones }}</td>
-                            <td>{{ $guide->receiver->telefono }}</td>
+                            <td>Recogida de envio: {{ $guide->shipping_pickup }}</td>
+                            <td>Telefono: {{ $guide->receiver->telefono }}</td>
                         </tr>
                         <tr>
-                            <td>{{ $guide->shipping_pickup }}</td>
-                            <td>{{ $guide->receiver->correo }}</td>
+                            <td>Guia No: {{ $guide->id }}</td>
+                            <td>Correo: {{ $guide->receiver->correo }}</td>
                         </tr>
                         <tr>
-                            <td>{{ $guide->urlguide }}</td>
-                            <td>{{ $guide->receiver->direccion }}</td>
+                            <td>Observaciones: {{ $guide->observaciones }}</td>
+                            <td>Direccion: {{ $guide->receiver->direccion }}</td>
                         </tr>
                     </tbody>
                 </table>
