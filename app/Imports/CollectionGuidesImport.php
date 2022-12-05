@@ -4,7 +4,6 @@ namespace App\Imports;
 
 use App\Models\Guide;
 use App\Models\Receiver;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
