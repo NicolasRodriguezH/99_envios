@@ -80,14 +80,14 @@ class OwnGuideController extends Controller
                 $guide->save();
 
                 $receiver = new Receiver();
-                $receiver->tipo_documento = $request->Destinatario['tipoDocumento'];
-                $receiver->numero_documento = $request->Destinatario['numeroDocumento'];
-                $receiver->nombre = $request->Destinatario['nombre'];
-                $receiver->primer_apellido = $request->Destinatario['primerApellido'];
-                $receiver->segundo_apellido = $request->Destinatario['segundoApellido'];
-                $receiver->telefono = $request->Destinatario['telefono'];
-                $receiver->correo = $request->Destinatario['correo'];
-                $receiver->direccion = $request->Destinatario['direccion'];
+                $receiver->tipo_documento = $request->Destinatario['TipoDocumento'];
+                $receiver->numero_documento = $request->Destinatario['NumeroDocumento'];
+                $receiver->nombre = $request->Destinatario['Nombre'];
+                $receiver->primer_apellido = $request->Destinatario['PrimerApellido'];
+                $receiver->segundo_apellido = $request->Destinatario['SegundoApellido'];
+                $receiver->telefono = $request->Destinatario['Telefono'];
+                $receiver->correo = $request->Destinatario['Correo'];
+                $receiver->direccion = $request->Destinatario['Direccion'];
                 $receiver->guide_id = $guide->id;
                 
                 $receiver->save();
