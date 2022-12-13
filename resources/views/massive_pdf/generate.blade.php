@@ -8,44 +8,30 @@
 </head>
 <body>
     <header>
-        <h1 style="text-align: center"> Guia en PDF </h1>
-        <hr> <br>
-        <p style="text-align: center">{{ $guide->valor_declarado }}</p>
-        {{-- <p style="text-align: center">{{ $guide->tipoEnvio->nombre }}</p> --}}
-        <p style="text-align: center">{{ $guide->aplica_contrapago }}</p>
-        <p style="text-align: center">{{ $guide->peso_bruto }}</p>
-        <p style="text-align: center">{{ $guide->unidad }}</p>
-        <p style="text-align: center">{{ $guide->dice_contener }}</p>
-        <p style="text-align: center">{{ $guide->observaciones }}</p>
-        {{-- <p style="text-align: center">{{ $guide->shipping_pickup }}</p>
-        <p style="text-align: center">{{ $guide->urlguide }}</p> --}}
-        <p style="text-align: center">{{ $guide->receiver->tipo_documento }}</p>
-        <p style="text-align: center">{{ $guide->receiver->numero_documento }}</p>
-        <p style="text-align: center">{{ $guide->receiver->nombre }}</p>
-        <p style="text-align: center">{{ $guide->receiver->primer_apellido }}</p>
-        <p style="text-align: center">{{ $guide->receiver->segundo_apellido }}</p>
-        <p style="text-align: center">{{ $guide->receiver->telefono }}</p>
-        <p style="text-align: center">{{ $guide->receiver->correo }}</p>
-        <p style="text-align: center">{{ $guide->receiver->direccion }}</p>
 
-        <hr> <br>
-        {{-- <p style="text-align: center">{{ $guide->valor_declarado }}</p>
-        <p style="text-align: center">{{ $guide->tipoEnvio->nombre }}</p>
-        <p style="text-align: center">{{ $guide->aplica_contrapago }}</p>
-        <p style="text-align: center">{{ $guide->peso_bruto }}</p>
-        <p style="text-align: center">{{ $guide->unidad }}</p>
-        <p style="text-align: center">{{ $guide->dice_contener }}</p>
-        <p style="text-align: center">{{ $guide->observaciones }}</p>
-        <p style="text-align: center">{{ $guide->shipping_pickup }}</p>
-        <p style="text-align: center">{{ $guide->urlguide }}</p>
-        <p style="text-align: center">{{ $guide->receiver->tipo_documento }}</p>
-        <p style="text-align: center">{{ $guide->receiver->numero_documento }}</p>
-        <p style="text-align: center">{{ $guide->receiver->nombre }}</p>
-        <p style="text-align: center">{{ $guide->receiver->primer_apellido }}</p>
-        <p style="text-align: center">{{ $guide->receiver->segundo_apellido }}</p>
-        <p style="text-align: center">{{ $guide->receiver->telefono }}</p>
-        <p style="text-align: center">{{ $guide->receiver->correo }}</p>
-        <p style="text-align: center">{{ $guide->receiver->direccion }}</p> --}}
+        @foreach ($guides as $guide)
+            
+            <h1 style="text-align: center"> Guia en PDF </h1>
+            <hr> <br>
+            <p style="text-align: center">{{ $guide['valordeclarado'] }}</p>
+            {{-- <p style="text-align: center">{{ $guide['aplicacontrapago'] }}</p> --}}
+            <p style="text-align: center">{{ $guide['pesobruto'] }}</p>
+            <p style="text-align: center">{{ $guide['unidad'] }}</p>
+            <p style="text-align: center">{{ $guide['dicecontener'] }}</p>
+            <p style="text-align: center">{{ $guide['observaciones'] }}</p>
+            {{-- <p style="text-align: center">{{ $guide->shipping_pickup }}</p>
+            <p style="text-align: center">{{ $guide->urlguide }}</p> --}}
+            <p style="text-align: center">{{ $guide['tipodocumento'] }}</p>
+            <p style="text-align: center">{{ $guide['numerodocumento'] }}</p>
+            <p style="text-align: center">{{ $guide['nombre'] }}</p>
+            <p style="text-align: center">{{ $guide['primerapellido'] }}</p>
+            <p style="text-align: center">{{ $guide['segundoapellido'] }}</p>
+            <p style="text-align: center">{{ $guide['telefono'] }}</p>
+            <p style="text-align: center">{{ $guide['correo'] }}</p>
+            <p style="text-align: center">{{ $guide['direccion'] }}</p>
+
+        @endforeach
+
     </header>
 
 

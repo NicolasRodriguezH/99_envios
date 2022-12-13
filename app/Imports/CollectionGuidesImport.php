@@ -27,8 +27,8 @@ class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkR
     */
 
     private $rows = 0;
-    private $guide = Guide::class;
-    private $receiver = Receiver::class;
+    private $guide = [];
+    //private $receiver = [];
 
     public function collection(Collection $collection)
     {
@@ -36,8 +36,8 @@ class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkR
         foreach ($collection as $row) {
 
             ++$this->rows;
-
-            $guide = Guide::create([
+            
+            Guide::create([
                 'valor_declarado' => (integer) $row['valordeclarado'],
                 'aplica_contrapago' => $row['aplicacontrapago'],
                 'peso_bruto' => (integer) $row['pesobruto'],
@@ -48,8 +48,8 @@ class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkR
                 'largo' => (integer) $row['largo'],
                 'ancho' => (integer) $row['ancho'],
                 'alto' => (integer) $row['alto'],
-             ]);
-            $receiver = Receiver::create([
+            ]);
+            Receiver::create([
                 'tipo_documento' => $row['tipodocumento'],
                 'numero_documento' => $row['numerodocumento'],
                 'nombre' => $row['nombre'],
@@ -59,20 +59,23 @@ class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkR
                 'correo' => $row['correo'],
                 'direccion' => $row['direccion'],
             ]);
-            $this->guide = $guide;
-            $this->receiver = $receiver;
+            $this->guide = $collection->toArray();
+            //$this->receiver = $collection->toArray();
+            
+            //dd($this->guide);
+            //$this->receiver = $receiver;
         }
-    }
-
-    public function getData(): array
-    {
-        return [$this->guide, $this->receiver];
     }
 
     public function getRowCount(): int {
         return $this->rows;
     }
 
+    public function getData(): array
+    {
+            return $this->guide;
+    }
+    
     //por si fuesen archivos muy grandes
     public function batchSize(): int
     {

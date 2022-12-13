@@ -34,14 +34,12 @@ class GuideMassiveExcelController extends Controller
             //$receiver = $import->getData();
             //dd($guides);
 
-            foreach ($guides as $guide) {
                 $pdf = PDF::loadView('massive_pdf.generate', [
-                    'guide' => $guide,                    
+                    'guides' => $guides,                    
                     //'receiver' => $receiver                    
                 ]);    
                 $pdf->setPaper('a4', 'landscape');                
                 return $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
-            }
             
             /* return response()->json([
                 // back()->with('success', 'Excel guides imported successfully')
