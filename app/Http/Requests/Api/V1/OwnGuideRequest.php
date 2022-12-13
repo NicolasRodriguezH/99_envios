@@ -30,10 +30,10 @@ class OwnGuideRequest extends FormRequest
             'Peso' => 'required',
             'DiceContener' => 'required',
 
-            'Destinatario.nombre' => 'required',
-            'Destinatario.primerApellido' => 'required',
-            'Destinatario.telefono' => 'required',
-            'Destinatario.direccion' => 'required',
+            'Destinatario.Nombre' => 'required',
+            'Destinatario.PrimerApellido' => 'required',
+            'Destinatario.Telefono' => 'required',
+            'Destinatario.Direccion' => 'required',
         ];
     }
 

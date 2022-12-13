@@ -14,7 +14,8 @@ class GuideMassiveExcelController extends Controller
     public function createMassiveGuides() {
         try {
             /* Deberia convertir esta collection en los parametros de la colleccion misma */
-            //$import = (new CollectionGuidesImport)->import(request()->file('file'));
+<<<<<<< HEAD
+            //(new CollectionGuidesImport)->import(request()->file('file'));
 
             $import = new CollectionGuidesImport;
             Excel::import($import, request()->file('file'));
@@ -41,10 +42,11 @@ class GuideMassiveExcelController extends Controller
                 $pdf->setPaper('a4', 'landscape');                
                 return $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
             
-            /* return response()->json([
-                // back()->with('success', 'Excel guides imported successfully')
-                'data' => 'success, Excel guides imported successfully',
-            ], 201); */
+                /* return response()->json([
+                    // back()->with('success', 'Excel guides imported successfully')
+                    'data' => 'success, Excel guides imported successfully',
+                ], 201); */
+            
                 
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();

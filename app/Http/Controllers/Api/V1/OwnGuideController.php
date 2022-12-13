@@ -80,29 +80,33 @@ class OwnGuideController extends Controller
                 $guide->save();
 
                 $receiver = new Receiver();
-                $receiver->tipo_documento = $request->Destinatario['tipoDocumento'];
-                $receiver->numero_documento = $request->Destinatario['numeroDocumento'];
-                $receiver->nombre = $request->Destinatario['nombre'];
-                $receiver->primer_apellido = $request->Destinatario['primerApellido'];
-                $receiver->segundo_apellido = $request->Destinatario['segundoApellido'];
-                $receiver->telefono = $request->Destinatario['telefono'];
-                $receiver->correo = $request->Destinatario['correo'];
-                $receiver->direccion = $request->Destinatario['direccion'];
+                $receiver->tipo_documento = $request->Destinatario['TipoDocumento'];
+                $receiver->numero_documento = $request->Destinatario['NumeroDocumento'];
+                $receiver->nombre = $request->Destinatario['Nombre'];
+                $receiver->primer_apellido = $request->Destinatario['PrimerApellido'];
+                $receiver->segundo_apellido = $request->Destinatario['SegundoApellido'];
+                $receiver->telefono = $request->Destinatario['Telefono'];
+                $receiver->correo = $request->Destinatario['Correo'];
+                $receiver->direccion = $request->Destinatario['Direccion'];
                 $receiver->guide_id = $guide->id;
                 
                 $receiver->save();
         
                 if( !empty($guide && $request) ) {
 
+                    
+
+
                     $pdf = PDF::loadView('pdf.generate', [
-                        'guide' => $guide
+                        'guide' => $guide,/* 
+                        'code' => $code */
                     ]);
         
                     $pdf->setPaper('a4', 'landscape');
                     
-                    $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
+                    return $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
 
-                    return response()->json([
+                   /*  return response()->json([
                         'data' => [
                             'success' => 'PDF generado y descargado con exito',
                             'user' => $guide->user->name,
@@ -126,7 +130,7 @@ class OwnGuideController extends Controller
                             'tipo_envio_id' => $guide->tipoEnvio->nombre,
                             //'novedad' => $guide->novelty->novelty,
                         ],
-                    ], 201);
+                    ], 201); */
                 }
 
         } catch (\Throwable $th) {
