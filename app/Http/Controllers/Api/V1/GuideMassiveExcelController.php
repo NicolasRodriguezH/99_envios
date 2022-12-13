@@ -14,38 +14,25 @@ class GuideMassiveExcelController extends Controller
     public function createMassiveGuides() {
         try {
             /* Deberia convertir esta collection en los parametros de la colleccion misma */
-<<<<<<< HEAD
             //(new CollectionGuidesImport)->import(request()->file('file'));
 
             $import = new CollectionGuidesImport;
             Excel::import($import, request()->file('file'));
 
-            /* for ($i=0; $i < $import->getRowCount(); $i++) { 
-
-                $guide = $import->getData();
-
-                //dd($guide);
-                $pdf = PDF::loadView('massive_pdf.generate', [
-                    'guide' => $guide                    
-                ]);    
-                $pdf->setPaper('a4', 'landscape');                
-                return $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
-            } */
             $guides = $import->getData();
-            //$receiver = $import->getData();
             //dd($guides);
 
-                $pdf = PDF::loadView('massive_pdf.generate', [
-                    'guides' => $guides,                    
-                    //'receiver' => $receiver                    
-                ]);    
-                $pdf->setPaper('a4', 'landscape');                
-                return $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
             
-                /* return response()->json([
-                    // back()->with('success', 'Excel guides imported successfully')
-                    'data' => 'success, Excel guides imported successfully',
-                ], 201); */
+            $pdf = PDF::loadView('massive_pdf.generate', [
+                'guides' => $guides
+            ]);    
+            $pdf->setPaper('a4', 'landscape');                
+            return $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
+        
+            /* return response()->json([
+                // back()->with('success', 'Excel guides imported successfully')
+                'data' => 'success, Excel guides imported successfully',
+            ], 201); */
             
                 
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {

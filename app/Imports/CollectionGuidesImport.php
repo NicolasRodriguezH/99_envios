@@ -28,7 +28,6 @@ class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkR
 
     private $rows = 0;
     private $guide = [];
-    //private $receiver = [];
 
     public function collection(Collection $collection)
     {
@@ -60,10 +59,7 @@ class CollectionGuidesImport implements ToCollection, WithHeadingRow, WithChunkR
                 'direccion' => $row['direccion'],
             ]);
             $this->guide = $collection->toArray();
-            //$this->receiver = $collection->toArray();
-            
             //dd($this->guide);
-            //$this->receiver = $receiver;
         }
     }
 

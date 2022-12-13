@@ -50,7 +50,7 @@
                         <td class="border border-gray-400 py-2 px-2 text-base">Segundo apellido: {{ $guide->receiver->segundo_apellido }}</td>
                     </tr>
                     <tr>
-                        <td class="border border-gray-400 py-2 px-2 text-base">Recogida de envio: {{ $guide->shipping_pickup }}</td>
+                        <td class="border border-gray-400 py-2 px-2 text-base">Recogida de envio: {{ $guide->recogida_envio }}</td>
                         <td class="border border-gray-400 py-2 px-2 text-base">Telefono: {{ $guide->receiver->telefono }}</td>
                     </tr>
                     <tr class="bg-gray-500">
