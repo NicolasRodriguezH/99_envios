@@ -47,7 +47,7 @@ class OwnGuideController extends Controller
                 $guide->valor_declarado = $request->ValorDeclarado;
                 $guide->tipo_envio_id = $request->TipoEnvioId;
                 $guide->aplica_contrapago = $request->AplicaContrapago;
-                $guide->peso_bruto = $request->PesoBruto;
+                $guide->peso_bruto = round($request->PesoBruto);
                 $guide->unidad = $request->Unidad;
                 $guide->dice_contener = $request->DiceContener;
                 $guide->observaciones = $request->Observaciones;
@@ -104,7 +104,8 @@ class OwnGuideController extends Controller
         
                     $pdf->setPaper('a4', 'landscape');
                     
-                    return $pdf->download('guia_generada.pdf');//.$pdf->stream('guia_generada.pdf');
+                    return $pdf->download('guia_generada.pdf');
+                    //$pdf->stream('guia_generada.pdf');
 
                    /*  return response()->json([
                         'data' => [

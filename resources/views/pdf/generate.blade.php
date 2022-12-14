@@ -20,7 +20,7 @@
         </div>
 
         <div>
-            <table class="w-full border-separate">
+            <table class="w-full">
                 <thead>
                     <tr>
                         <th class="border border-gray-400 py-4 px-4 text-gray-800 text-2xl">Detalle del envío</th>

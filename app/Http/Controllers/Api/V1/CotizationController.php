@@ -21,26 +21,22 @@ class CotizationController extends Controller
     public function store(Request $request)
     {
         try {
-            /* Calcular valor_flete mas contrapago de ser elegido */
-            /* Al cliente solo le muestra el valor del flete, independientemente del valor declarado */
-
-            /* Si no aplica contrapago se le cobra solo el flete = varia */
+            /* Segun lo hablado seria asi */
+            /* Pero deberia incluir el valor delcarado en caso de que AplicaContrapago sea true, segun yo */
 
             if ($request->AplicaContrapago === true) {
                     $origin = new Origin();
-                    $valor_flete = $origin->find($request->OriginId)->valor_flete;
-                    
-                    //$cotizacion = $request->ValorDeclarado + $valor_flete;
-                    //$valor_flete = $origin->valor_flete;
+                    $cotizacion = $origin->find($request->OriginId)->valor_flete;
 
-                    $percentage = $valor_flete * 3; // Porcentaje 3 es variable - SE MANEJA DEL OTRO LADO
+                    //$cotizacion = $request->ValorDeclarado + $cotizacion; // Como aca que se incluye ValorDeclarado
+
+                    /* $percentage = $cotizacion * 3; // Porcentaje 3 seria variable - SE MANEJA DEL OTRO LADO
                     $percentage /= 100;
-
-                    $valor_flete += $percentage;
+                    $cotizacion += $percentage; */
 
                 return response()->json([
                     'success' => true,
-                    'cotizacion' => round($valor_flete, 0),
+                    'cotizacion' => round($cotizacion, 0),
                 ], 201);
             }
 

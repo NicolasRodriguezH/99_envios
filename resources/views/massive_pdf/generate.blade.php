@@ -6,29 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/app.css">
+    <style>
+        li{
+        padding-bottom: 25px;
+        list-style: none;
+        }
+        .line{
+        padding-right: 15em;
+        margin: 0 1em;
+        border-bottom: 1px solid grey;
+        }
+    </style>
     <title>Guía PDF</title>
 </head>
 <body>
-    @foreach ($guides as $guide)
-        <div class="container py-8">
-            <div class="text-right">
-                <img class="h-20 w-20 rounded-full" src="proyecto2.jpeg" alt="Logo 99envios">
-            </div>
-            {{-- <div>
-                {!! DNS1D::getBarcodeHTML($guide['id'], 'EAN2') !!}
-                {!! $guide['id'] !!}
-            </div> --}}
+    
+    <div class="container py-8">
+        <div class="text-right">
+            <img class="h-20 w-20 rounded-full" src="proyecto2.jpeg" alt="Logo 99envios">
         </div>
-
         <div>
-            <table class="w-full border-separate">
+            {!! DNS1D::getBarcodeHTML($guide['id'], 'EAN2') !!}
+            {!! $guide['id'] !!} {{-- No se imprime el numero al ser un id --}}
+        </div>
+    </div>
+    @foreach ($guides as $guide)
+        <div>
+            <table class="w-full">
                 <thead>
                     <tr>
                         <th class="border border-gray-400 py-4 px-4 text-gray-800 text-2xl">Detalle del envío</th>
                         <th class="border border-gray-400 py-4 px-4 text-gray-800 text-2xl">Receptor</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     <tr class="bg-gray-500">
                         <td class="border border-gray-400 py-2 px-2 text-base">Valor declarado: {{ $guide['valordeclarado'] }}</td>
@@ -64,6 +74,10 @@
                     </tr>
                 </tbody>
             </table>
+            <br>
+            <ul>
+                <li>Firma de {{$guide['nombre']}}:<span class="line"></span></li>
+            </ul>
         </div>
     @endforeach
 </body>
